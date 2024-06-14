@@ -73,7 +73,7 @@ on damage of ender crystal:
     
 on rightclick on respawn anchor:
     set metadata value "playerWhoDetonated" of event-block to player's uuid
-    broadcast "Metadata value pWhoDetonated is the player %player's uuid%"
+    #broadcast "Metadata value pWhoDetonated is the player %player's uuid%"
 
 #on projectile hit:
     #if victim is a explosive minecart:
@@ -360,6 +360,6 @@ function randomKit(p: player):
         set slot 10 of {_p}'s inventory to splash potion of strong turtle master
 
 on pick up:
-    if event-item is end crystal or respawn anchor:
+    if event-item is end crystal:
         if {specialkitlist::%{_p}'s uuid%} is 1:
             cancel event
