@@ -30,8 +30,7 @@ function checkKS(p: player):
 on death of player:
     set {_uuid} to metadata value "playerWhoDetonated" of attacker
 
-    if {specialkitlist::%victim's uuid%} is 1:
-        clear {specialkitlist::%victim's uuid%}
+    clear {specialkitlist::%victim's uuid%}
 
     #if {playerBounty::%victim's uuid%} is set:
         #give {playerBounty::%victim's uuid%} to {_playerWhoDetonated}
