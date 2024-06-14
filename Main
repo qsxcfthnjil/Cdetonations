@@ -49,8 +49,9 @@ on death of player:
         checkKS({_playerWhoDetonated})
         if {playerBounty::%victim's uuid%} is set:
             give {playerBounty::%victim's uuid%} to {_playerWhoDetonated}
-            broadcast "bounty claimed - first trigger"
-            #clear {playerBounty::%victim's uuid%}    
+            broadcast "bounty claimed: %{playerBounty::%victim's uuid%}%"
+            wait 1 tick
+            clear {playerBounty::%victim's uuid%}
     else:
         give 3 sunflower named "<reset><yellow>&lCoin" to attacker    
         #broadcast "UUID of playerWhoDetonated: %{_uuid}%"
@@ -60,8 +61,9 @@ on death of player:
         checkKS(attacker)
         if {playerBounty::%victim's uuid%} is set:
             give {playerBounty::%victim's uuid%} to attacker
-            broadcast "bounty claimed - second trigger"
-            #clear {playerBounty::%victim's uuid%}
+            broadcast "bounty claimed: %{playerBounty::%victim's uuid%}%"
+            wait 1 tick
+            clear {playerBounty::%victim's uuid%}
 
 
 
