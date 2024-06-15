@@ -59,18 +59,18 @@ on death of player:
             wait 1 tick
             clear {playerBounty::%victim's uuid%}
     else if event-damagecause is block explosion:
-        set {_uuid} to metadata value "playerWhoDetonated" of {anchorkiller}
+        set {_uuid} to {anchorkiller}
         broadcast "<bold>Anchor kill detected - %{_uuid}%"
-        give 3 sunflower named "<reset><yellow>&lCoin" to {_playerWhoDetonated}    
+        give 3 sunflower named "<reset><yellow>&lCoin" to {anchorkiller}    
         #broadcast "UUID of playerWhoDetonated: %{_uuid}%"
         clear {killStreak::%victim's uuid%}		
         add 1 to {killStreak::%{_uuid}%}
-        set {_playerWhoDetonated} to {_uuid} parsed as offline player
-        send "&aEnemy Down" to {_playerWhoDetonated}
-        checkKS({_playerWhoDetonated})
+        set {anchorkiller} to {_uuid} parsed as offline player
+        send "&aEnemy Down" to {anchorkiller}
+        checkKS({anchorkiller})
         if {playerBounty::%victim's uuid%} is set:
-            give {playerBounty::%victim's uuid%} to {_playerWhoDetonated}
-            broadcast "%{_playerWhoDetonated}% claimed the bounty: %{playerBounty::%victim's uuid%}%"
+            give {playerBounty::%victim's uuid%} to {anchorkiller}
+            broadcast "%{anchorkiller}% claimed the bounty: %{playerBounty::%victim's uuid%}%"
             wait 1 tick
             clear {playerBounty::%victim's uuid%}
     else:
@@ -94,8 +94,9 @@ on damage of ender crystal:
     
 on rightclick on respawn anchor:
     set {anchorkiller} to player's uuid
-    set metadata value "playerWhoDetonated" of {anchorkiller} to player's uuid
-    broadcast "anchorkiller: %{anchorkiller}%, pWhoDetonated: %metadata value "playerWhoDetonated" of {anchorkiller}%"
+    #set metadata value "playerWhoDetonated" of {anchorkiller} to player's uuid
+    broadcast "Anchorkiller: %{anchorkiller}%"
+    #broadcast "anchorkiller: %{anchorkiller}%, pWhoDetonated: %metadata value "playerWhoDetonated" of {anchorkiller}%"
     #broadcast "Metadata value pWhoDetonated is %metadata value "playerWhoDetonated" of player% and the victim was a %player%"
 
 #on projectile hit:
