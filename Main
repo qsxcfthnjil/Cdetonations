@@ -12,6 +12,7 @@ function checkKS(p: player):
     set {_bounty::*} to {@bounty}
     loop {_rewardReq::*}:
         {killStreak::%{_uuid}%} = loop-value
+	broadcast "<red><bold>%{_p}% had reached a killstreak of %{killStreak::%{_uuid}%}%!"
         broadcast "%{_p}% has been awarded with <green><bold>%{_rewards::%loop-index%}%"
         set {playerBounty::%{_uuid}%} to {_bounty::%loop-index%}
         broadcast "%{_p}%'s bounty has increased to <red><bold>%{_bounty::%loop-index%}%!"
@@ -48,7 +49,7 @@ on death of player:
         checkKS({_playerWhoDetonated})
         if {playerBounty::%victim's uuid%} is set:
             give {playerBounty::%victim's uuid%} to {_playerWhoDetonated}
-            broadcast "bounty claimed: %{playerBounty::%victim's uuid%}%"
+            broadcast "%{_playerWhoDetonated}% claimed the bounty: %{playerBounty::%victim's uuid%}%"
             wait 1 tick
             clear {playerBounty::%victim's uuid%}
     else:
@@ -60,7 +61,7 @@ on death of player:
         checkKS(attacker)
         if {playerBounty::%victim's uuid%} is set:
             give {playerBounty::%victim's uuid%} to attacker
-            broadcast "bounty claimed: %{playerBounty::%victim's uuid%}%"
+            broadcast "%attacker% claimed the bounty: %{playerBounty::%victim's uuid%}%"
             wait 1 tick
             clear {playerBounty::%victim's uuid%}
 
@@ -106,22 +107,21 @@ command /test:
         set slot 0 of player's inventory to sunflower named "<reset><yellow>&lCoin"
         set slot 1 of player's inventory to paper named "<red><bold>Currently DISABLED until balancing is complete"
 
-command testspecialkit:
-
+command testspecialkit <player=%player%>:
     trigger:
-        set {specialkitlist::%{_p}'s uuid%} to 1
+        set {specialkitlist::%arg-1's uuid%} to 1
         broadcast "<red><bold><italic>%{_p}% Has randomly recieved a DIVINE BLESSING: Swordsman of the Abyss"
-        set slot 0 of {_p}'s inventory to (netherite sword of sharpness 5 and sweeping edge 3 and fire aspect 2) named "<black><bold>Starless Night"
-        set slot 1 of {_p}'s inventory to 16 of ender pearl
-        set slot 2 of {_p}'s inventory to splash potion of strong strength
-        set slot 3 of {_p}'s inventory to splash potion of strong speed
-        set slot 4 of {_p}'s inventory to splash potion of strong strength
-        set slot 5 of {_p}'s inventory to splash potion of strong speed
-        set slot 6 of {_p}'s inventory to splash potion of strong strength
-        set slot 7 of {_p}'s inventory to splash potion of strong speed
-        set slot 8 of {_p}'s inventory to 64 of golden apple
-        set slot 9 of {_p}'s inventory to splash potion of strong turtle master
-        set slot 10 of {_p}'s inventory to splash potion of strong turtle master
+        set slot 0 of player's inventory to (netherite sword of sharpness 5 and sweeping edge 3 and fire aspect 2) named "<black><bold>Starless Night"
+        set slot 1 of player's inventory to 16 of ender pearl
+        set slot 2 of player's inventory to splash potion of strong strength
+        set slot 3 of player's inventory to splash potion of strong speed
+        set slot 4 of player's inventory to splash potion of strong strength
+        set slot 5 of player's inventory to splash potion of strong speed
+        set slot 6 of player's inventory to splash potion of strong strength
+        set slot 7 of player's inventory to splash potion of strong speed
+        set slot 8 of player's inventory to 64 of golden apple
+        set slot 9 of player's inventory to splash potion of strong turtle master
+        set slot 10 of player's inventory to splash potion of strong turtle master
 
 
 
@@ -360,5 +360,5 @@ function randomKit(p: player):
 
 on pick up:
     if event-item is end crystal:
-        if {specialkitlist::%{_p}'s uuid%} is 1:
+        if {specialkitlist::%player's uuid%} is 1:
             cancel event
