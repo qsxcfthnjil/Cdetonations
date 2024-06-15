@@ -30,7 +30,9 @@ function checkKS(p: player):
 
 on death of player:
     set {_uuid} to metadata value "playerWhoDetonated" of attacker
-
+    set {_drops::*} to drops  
+    clear drops
+    drop {_drops::*} at victim without velocity
     clear {specialkitlist::%victim's uuid%}
 
     #if {playerBounty::%victim's uuid%} is set:
@@ -97,17 +99,20 @@ command killstreak [<offlineplayer>]:
                 send "%arg-1%'s current Kill Streak is 0"
 				
 command setkillstreak <number> [to] <player=%player%>:
+    permission: skript.admin
     trigger:
         set {killStreak::%arg-2's uuid%} to arg-1
         send "Set KS to %{killStreak::%arg-2's uuid%}%"
         checkKS(arg-2)
 
 command /test:
+    permission: skript.admin
     trigger:
         set slot 0 of player's inventory to sunflower named "<reset><yellow>&lCoin"
         set slot 1 of player's inventory to paper named "<red><bold>Currently DISABLED until balancing is complete"
 
 command testspecialkit <player=%player%>:
+    permission: skript.admin
     trigger:
         set {specialkitlist::%arg-1's uuid%} to 1
         broadcast "<red><bold><italic>%{_p}% Has randomly recieved a DIVINE BLESSING: Swordsman of the Abyss"
