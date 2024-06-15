@@ -29,7 +29,9 @@ function checkKS(p: player):
 
 
 on death of player:
-    set {_uuid} to metadata value "playerWhoDetonated" of attacker
+
+    broadcast "event-damagecause is <bold>%event-damagecause%"
+
     set {_drops::*} to drops  
     clear drops
     drop {_drops::*} at victim without velocity
@@ -41,7 +43,24 @@ on death of player:
         #wait 1 tick
         #clear {playerBounty::%victim's uuid%}
 
-    if "%attacker%" contains "ender crystal" or "explosive minecart":
+    if event-damagecause is entity explosion:
+        set {_uuid} to metadata value "playerWhoDetonated" of attacker
+        #broadcast "<bold>Crystal kill detected - %{_uuid}%"
+        give 3 sunflower named "<reset><yellow>&lCoin" to {_playerWhoDetonated}    
+        #broadcast "UUID of playerWhoDetonated: %{_uuid}%"
+        clear {killStreak::%victim's uuid%}		
+        add 1 to {killStreak::%{_uuid}%}
+        set {_playerWhoDetonated} to {_uuid} parsed as offline player
+        send "&aEnemy Down" to {_playerWhoDetonated}
+        checkKS({_playerWhoDetonated})
+        if {playerBounty::%victim's uuid%} is set:
+            give {playerBounty::%victim's uuid%} to {_playerWhoDetonated}
+            broadcast "%{_playerWhoDetonated}% claimed the bounty: %{playerBounty::%victim's uuid%}%"
+            wait 1 tick
+            clear {playerBounty::%victim's uuid%}
+    else if event-damagecause is block explosion:
+        set {_uuid} to metadata value "playerWhoDetonated" of {anchorkiller}
+        broadcast "<bold>Anchor kill detected - %{_uuid}%"
         give 3 sunflower named "<reset><yellow>&lCoin" to {_playerWhoDetonated}    
         #broadcast "UUID of playerWhoDetonated: %{_uuid}%"
         clear {killStreak::%victim's uuid%}		
@@ -71,11 +90,13 @@ on death of player:
 
 on damage of ender crystal:
     set metadata value "playerWhoDetonated" of victim to uuid of attacker
-    #broadcast "Metadata value pWhoDetonated is the player %attacker% and the victim was a %victim%"
+    broadcast "Metadata value pWhoDetonated is the player %attacker% and the victim was a %victim%"
     
 on rightclick on respawn anchor:
-    set metadata value "playerWhoDetonated" of event-block to player's uuid
-    #broadcast "Metadata value pWhoDetonated is the player %player's uuid%"
+    set {anchorkiller} to player's uuid
+    set metadata value "playerWhoDetonated" of {anchorkiller} to player's uuid
+    broadcast "anchorkiller: %{anchorkiller}%, pWhoDetonated: %metadata value "playerWhoDetonated" of {anchorkiller}%"
+    #broadcast "Metadata value pWhoDetonated is %metadata value "playerWhoDetonated" of player% and the victim was a %player%"
 
 #on projectile hit:
     #if victim is a explosive minecart:
@@ -375,8 +396,15 @@ function randomKit(p: player):
         set slot 8 of {_p}'s inventory to 64 of golden apple
         set slot 9 of {_p}'s inventory to splash potion of strong turtle master
         set slot 10 of {_p}'s inventory to splash potion of strong turtle master
-
+        set slot 11 of {_p}'s inventory to splash potion of strong turtle master
+        set slot 12 of {_p}'s inventory to splash potion of strong turtle master
+        set slot 13 of {_p}'s inventory to splash potion of strong turtle master
+        set slot 14 of {_p}'s inventory to splash potion of strong turtle master
+        set slot 15 of {_p}'s inventory to splash potion of strong turtle master
 on pick up:
     if event-item is end crystal:
+        if {specialkitlist::%player's uuid%} is 1:
+            cancel event
+    if event-item is respawn anchor:
         if {specialkitlist::%player's uuid%} is 1:
             cancel event
