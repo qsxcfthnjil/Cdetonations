@@ -74,6 +74,7 @@ on death of player:
             wait 1 tick
             clear {playerBounty::%victim's uuid%}
     else:
+        set {_uuid} to attacker's uuid
         give 3 sunflower named "<reset><yellow>&lCoin" to attacker    
         #broadcast "UUID of playerWhoDetonated: %{_uuid}%"
         clear {killStreak::%victim's uuid%}		
