@@ -116,29 +116,42 @@ command testspecialkit <player=%player%>:
     trigger:
         set {specialkitlist::%arg-1's uuid%} to 1
         broadcast "<red><bold><italic>%{_p}% Has randomly recieved a DIVINE BLESSING: Swordsman of the Abyss"
-        set slot 0 of player's inventory to (netherite sword of sharpness 5 and sweeping edge 3 and fire aspect 2) named "<black><bold>Starless Night"
-        set slot 1 of player's inventory to 16 of ender pearl
-        set slot 2 of player's inventory to splash potion of strong strength
-        set slot 3 of player's inventory to splash potion of strong speed
-        set slot 4 of player's inventory to splash potion of strong strength
-        set slot 5 of player's inventory to splash potion of strong speed
-        set slot 6 of player's inventory to splash potion of strong strength
-        set slot 7 of player's inventory to splash potion of strong speed
-        set slot 8 of player's inventory to 64 of golden apple
-        set slot 9 of player's inventory to splash potion of strong turtle master
-        set slot 10 of player's inventory to splash potion of strong turtle master
+        set slot 0 of arg-1's inventory to (netherite sword of sharpness 5 and sweeping edge 3 and fire aspect 2) named "<black><bold>Starless Night"
+        set slot 1 of arg-1's inventory to 16 of ender pearl
+        set slot 2 of arg-1's inventory to splash potion of strong strength
+        set slot 3 of arg-1's inventory to splash potion of strong speed
+        set slot 4 of arg-1's inventory to splash potion of strong strength
+        set slot 5 of arg-1's inventory to splash potion of strong speed
+        set slot 6 of arg-1's inventory to splash potion of strong strength
+        set slot 7 of arg-1's inventory to splash potion of strong speed
+        set slot 8 of arg-1's inventory to 64 of golden apple
+        set slot 9 of arg-1's inventory to splash potion of strong turtle master
+        set slot 10 of arg-1's inventory to splash potion of strong turtle master
+        set arg-1's helmet to red silence netherite helmet of protection 3 and unbreaking 3
+        set arg-1's chestplate to red silence netherite chestplate of protection 3 and unbreaking 3
+        set arg-1's leggings to red silence netherite leggings of protection 3 and unbreaking 3
+        set arg-1's boots to red silence netherite boots of protection 3 and unbreaking 3
+
+
+command /enchant <enchantment type>:
+    permission: skript.enchant
+    trigger:
+        enchant player's tool with arg-1
+        message "<bold>Enchanted with %arg-1%"
 
 
 
-
-
-
-
-
-
-
-
-
+command /rename [<text>]:
+    permission: skript.rename
+    description: Rename the item in your hand.
+    trigger:
+        if player's tool is not air:
+            if arg-1 is set:
+                set name of player's tool to colored arg-1
+            else:
+                message "&cpleas name >:("
+        else:
+            message "<bold> Can't name air."
 
 
 
@@ -338,15 +351,15 @@ function randomKit(p: player):
     set {_specialkit} to random integer between 1 and 101
     if {_specialkit} is 100:
         set {specialkitlist::%{_p}'s uuid%} to 1
-        broadcast "<red><bold><italic>%{_p}% Has randomly recieved a DIVINE BLESSING: Fallen Segregatist"
+        broadcast "<red><bold><italic>%{_p}% Has randomly recieved a DIVINE BLESSING: Fallen Armsman"
         set slot 0 of {_p}'s inventory to crossbow of quick charge 5 named "<black><bold>M4A1"
         set the off hand item of {_p} to crossbow of quick charge 5 and curse of vanishing named "<black><bold>M4A1"
         set slot 2 of {_p}'s inventory to 64 of tipped arrow of harming 
         set slot 3 of {_p}'s inventory to 64 of tipped arrow of harming 
-        set {_p}'s helmet to chainmail helmet of blast protection 5 and protection 2 and curse of vanishing
-        set {_p}'s chestplate to chainmail chestplate of blast protection 5 and protection 2 and curse of vanishing
-        set {_p}'s leggings to chainmail leggings of blast protection 5 and protection 2 and curse of vanishing
-        set {_p}'s boots to chainmail boots of blast protection 5 and protection 2 and curse of vanishing       
+        set {_p}'s helmet to chainmail helmet of blast protection 5 and protection 2 and curse of vanishing and curse of binding
+        set {_p}'s chestplate to chainmail chestplate of blast protection 5 and protection 2 and curse of vanishing and curse of binding
+        set {_p}'s leggings to chainmail leggings of blast protection 5 and protection 2 and curse of vanishing and curse of binding
+        set {_p}'s boots to chainmail boots of blast protection 5 and protection 2 and curse of vanishing and curse of binding
 
     if {_specialkit::%{_p}'s uuid%} is 101:
         set {specialkitlist::%{_p}'s uuid%} to 1
