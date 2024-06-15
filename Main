@@ -12,7 +12,7 @@ function checkKS(p: player):
     set {_bounty::*} to {@bounty}
     loop {_rewardReq::*}:
         {killStreak::%{_uuid}%} = loop-value
-	broadcast "<red><bold>%{_p}% had reached a killstreak of %{killStreak::%{_uuid}%}%!"
+        broadcast "<red><bold>%{_p}% had reached a killstreak of %{killStreak::%{_uuid}%}%!"
         broadcast "%{_p}% has been awarded with <green><bold>%{_rewards::%loop-index%}%"
         set {playerBounty::%{_uuid}%} to {_bounty::%loop-index%}
         broadcast "%{_p}%'s bounty has increased to <red><bold>%{_bounty::%loop-index%}%!"
