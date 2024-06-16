@@ -3,7 +3,7 @@
 	
 options:
     rewardReq: 3, 5, 8, 10, 13, 15, 18 and 20
-    rewards: 32 experience bottle, 32 sunflower named "<reset><yellow>&lCoin", 64 experience bottle, 4 netherite ingot, 64 sunflower named "<reset><yellow>&lCoin", (1 diamond coast golden helmet of protection 9, unbreaking 99 and mending) named "<yellow><bold>CROWN", 2 paper named "<reset><red>&lKillstreak Voucher" and 4 paper named "<reset><red>&lKillstreak Voucher"
+    rewards: 32 experience bottle, 32 sunflower named "<reset><yellow>&lCoin", 64 experience bottle, 4 netherite ingot, 64 sunflower named "<reset><yellow>&lCoin", (1 diamond coast golden helmet of protection 9, unbreaking 99 and mending) named "<yellow><bold>CROWN", 2 paper named "<reset><red>&lKillstreak Voucher" and 6 paper named "<reset><red>&lKillstreak Voucher"
     bounty: 10 sunflower named "<reset><yellow>&lCoin", 32 sunflower named "<reset><yellow>&lCoin", 48 sunflower named "<reset><yellow>&lCoin", 64 sunflower named "<reset><yellow>&lCoin", 2 paper named "<reset><red>&lKillstreak Voucher", 4 paper named "<reset><red>&lKillstreak Voucher", 5 paper named "<reset><red>&lKillstreak Voucher" and 6 paper named "<reset><red>&lKillstreak Voucher"
 function checkKS(p: player):
     set {_uuid} to {_p}'s uuid
@@ -11,15 +11,30 @@ function checkKS(p: player):
     set {_rewards::*} to {@rewards}
     set {_bounty::*} to {@bounty}
     loop {_rewardReq::*}:
-        {killStreak::%{_uuid}%} = loop-value
-        broadcast "<red><bold>%{_p}% had reached a killstreak of %{killStreak::%{_uuid}%}%!"
-        broadcast "%{_p}% has been awarded with <green><bold>%{_rewards::%loop-index%}%"
-        set {playerBounty::%{_uuid}%} to {_bounty::%loop-index%}
-        broadcast "%{_p}%'s bounty has increased to <red><bold>%{_bounty::%loop-index%}%!"
-        #{_rewards::%loop-index%} is a number:
-            #add {_rewards::%loop-index%} to {_p}'s balance
-        give {_rewards::%loop-index%} to {_p}
-        stop
+        if {killStreak::%{_uuid}%} is 20:
+            broadcast "<red><bold>%{_p}% IS ON FIRE! THEY'VE REACHED A TWENTY KILLSTREAK!!!"
+            broadcast "%{_p}% has been awarded with <green><bold>%{_rewards::%loop-index%}%"
+            set {playerBounty::%{_uuid}%} to {_bounty::%loop-index%}
+            broadcast "LET THE HUNT BEGIN! %{_p}%'s BOUNTY HAS BEEN RAISED TO <red><bold>%{_bounty::%loop-index%}%!! THEY NOW EXUDE A MURDEROUS AURA!"
+            #{_rewards::%loop-index%} is a number:
+                #add {_rewards::%loop-index%} to {_p}'s balance
+            give {_rewards::%loop-index%} to {_p}
+            set {godmode::%{_uuid}%} to true
+            while {godmode:%{_uuid}%} is true:
+                apply swiftness 2 to the player
+                apply glowing to the player
+                apply strength 2 to the player
+                wait 100 ticks
+            stop
+        else if {killStreak::%{_uuid}%} is loop-value:
+            broadcast "<red><bold>%{_p}% had reached a killstreak of %{killStreak::%{_uuid}%}%!"
+            broadcast "%{_p}% has been awarded with <green><bold>%{_rewards::%loop-index%}%"
+            set {playerBounty::%{_uuid}%} to {_bounty::%loop-index%}
+            broadcast "%{_p}%'s bounty has increased to <red><bold>%{_bounty::%loop-index%}%!"
+            #{_rewards::%loop-index%} is a number:
+                #add {_rewards::%loop-index%} to {_p}'s balance
+            give {_rewards::%loop-index%} to {_p}
+            stop
 
 #on death of player:
     #clear {killStreak::%victim's uuid%}
