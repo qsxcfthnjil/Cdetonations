@@ -10,20 +10,20 @@ function checkKS(p: player):
     set {_rewardReq::*} to {@rewardReq}
     set {_rewards::*} to {@rewards}
     set {_bounty::*} to {@bounty}
-	if {killStreak::%{_uuid}%} is 20:
-	    broadcast "<red><bold>%{_p}% IS ON FIRE! THEY'VE REACHED A TWENTY KILLSTREAK!!!"
-	    broadcast "%{_p}% has been awarded with <green><bold>%{_rewards::%loop-index%}%"
-	    set {playerBounty::%{_uuid}%} to {_bounty::%loop-index%}
-	    broadcast "<green><bold>LET THE HUNT BEGIN! %{_p}%'s BOUNTY HAS BEEN RAISED TO <reset><red><bold>%{_bounty::%loop-index%}%!! THEY NOW EXUDE A MURDEROUS AURA!"
-	    #{_rewards::%loop-index%} is a number:
-		#add {_rewards::%loop-index%} to {_p}'s balance
-	    give {_rewards::%loop-index%} to {_p}
-	    set {godmode::%{_uuid}%} to true
-	    while {godmode:%{_uuid}%} is true:
-        	apply swiftness 2 to the player
-        	apply glowing to the player
-        	apply strength 2 to the player
-        	wait 100 ticks
+    if {killStreak::%{_uuid}%} is 20:
+        broadcast "<red><bold>%{_p}% IS ON FIRE! THEY'VE REACHED A TWENTY KILLSTREAK!!!"
+        broadcast "%{_p}% has been awarded with <green><bold>%{_rewards::8}%"
+        set {playerBounty::%{_uuid}%} to {_bounty::8}
+        broadcast "<green><bold>LET THE HUNT BEGIN! %{_p}%'s BOUNTY HAS BEEN RAISED TO <reset><red><bold>%{_bounty::8}%!! THEY NOW EXUDE A MURDEROUS AURA!"
+        #{_rewards::%loop-index%} is a number:
+        #add {_rewards::%loop-index%} to {_p}'s balance
+        give {_rewards::8} to {_p}
+        set {godmode::%{_uuid}%} to true
+        while {godmode:%{_uuid}%} is true:
+            apply swiftness 2 to the player
+            apply glowing to the player
+            apply strength 2 to the player
+            wait 100 ticks
     else:
         loop {_rewardReq::*}:
             if {killStreak::%{_uuid}%} is loop-value:
