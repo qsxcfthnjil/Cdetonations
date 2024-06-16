@@ -51,7 +51,7 @@ on death of player:
     clear drops
     drop {_drops::*} at victim without velocity
     clear {specialkitlist::%victim's uuid%}
-
+    clear {godmode::%victim's uuid%}    
     #if {playerBounty::%victim's uuid%} is set:
         #give {playerBounty::%victim's uuid%} to {_playerWhoDetonated}
         #broadcast "bounty claimed: %{playerBounty::%victim's uuid%}%"
