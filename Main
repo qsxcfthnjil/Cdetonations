@@ -15,7 +15,7 @@ function checkKS(p: player):
             broadcast "<red><bold>%{_p}% IS ON FIRE! THEY'VE REACHED A TWENTY KILLSTREAK!!!"
             broadcast "%{_p}% has been awarded with <green><bold>%{_rewards::%loop-index%}%"
             set {playerBounty::%{_uuid}%} to {_bounty::%loop-index%}
-            broadcast "LET THE HUNT BEGIN! %{_p}%'s BOUNTY HAS BEEN RAISED TO <red><bold>%{_bounty::%loop-index%}%!! THEY NOW EXUDE A MURDEROUS AURA!"
+            broadcast "<green><bold>LET THE HUNT BEGIN! %{_p}%'s BOUNTY HAS BEEN RAISED TO <reset><red><bold>%{_bounty::%loop-index%}%!! THEY NOW EXUDE A MURDEROUS AURA!"
             #{_rewards::%loop-index%} is a number:
                 #add {_rewards::%loop-index%} to {_p}'s balance
             give {_rewards::%loop-index%} to {_p}
