@@ -51,7 +51,7 @@ on death of player:
     clear drops
     drop {_drops::*} at victim
     loop {_drops::*}:
-        set velocity of loop-value to vector(0,0.5,%random integer between 0 and 10% / 10
+        set velocity of loop-value to vector(0,0.5,%random integer between 0 and 10% / 10)
     clear {specialkitlist::%victim's uuid%}
     clear {godmode::%victim's uuid%}    
     #if {playerBounty::%victim's uuid%} is set:
