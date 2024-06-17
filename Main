@@ -166,10 +166,10 @@ command testspecialkit <player=%player%>:
         set slot 8 of arg-1's inventory to 64 of golden apple
         set slot 9 of arg-1's inventory to splash potion of strong turtle master
         set slot 10 of arg-1's inventory to splash potion of strong turtle master
-        set arg-1's helmet to red silence netherite helmet of protection 3 and unbreaking 3
-        set arg-1's chestplate to red silence netherite chestplate of protection 3 and unbreaking 3
-        set arg-1's leggings to red silence netherite leggings of protection 3 and unbreaking 3
-        set arg-1's boots to red silence netherite boots of protection 3 and unbreaking 3
+        set arg-1's helmet to red silence netherite helmet of protection 3 and unbreaking 3 and curse of binding
+        set arg-1's chestplate to red silence netherite chestplate of protection 3 and unbreaking 3 and curse of binding
+        set arg-1's leggings to red silence netherite leggings of protection 3 and unbreaking 3 and curse of binding
+        set arg-1's boots to red silence netherite boots of protection 3 and unbreaking 3 and curse of binding
 
 
 command /enchantsk <enchantment type>:
@@ -427,10 +427,10 @@ function randomKit(p: player):
         set slot 13 of {_p}'s inventory to splash potion of strong turtle master
         set slot 14 of {_p}'s inventory to splash potion of strong turtle master
         set slot 15 of {_p}'s inventory to splash potion of strong turtle master
-        set {_p}'s helmet to red silence netherite helmet of protection 3 and unbreaking 3
-        set {_p}'s chestplate to red silence netherite chestplate of protection 3 and unbreaking 3
-        set {_p}'s leggings to red silence netherite leggings of protection 3 and blast protection 3 and unbreaking 3
-        set {_p}'s boots to red silence netherite boots of protection 3 and unbreaking 3
+        set {_p}'s helmet to red silence netherite helmet of protection 3 and unbreaking 3 and curse of binding
+        set {_p}'s chestplate to red silence netherite chestplate of protection 3 and unbreaking 3 and curse of binding
+        set {_p}'s leggings to red silence netherite leggings of protection 3 and blast protection 3 and unbreaking 3 and curse of binding
+        set {_p}'s boots to red silence netherite boots of protection 3 and unbreaking 3 and curse of binding
 on pick up:
     if event-item is end crystal:
         if {specialkitlist::%player's uuid%} is 1:
