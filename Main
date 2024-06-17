@@ -19,10 +19,10 @@ function checkKS(p: player):
         #add {_rewards::%loop-index%} to {_p}'s balance
         give {_rewards::8} to {_p}
         set {godmode::%{_uuid}%} to true
-        while {godmode:%{_uuid}%} is true:
-            apply swiftness 2 to the player
-            apply glowing to the player
-            apply strength 2 to the player
+        while {godmode::%{_uuid}%} is true:
+            apply swiftness 2 to {_p}
+            apply glowing to {_p}
+            apply strength 2 to {_p}
             wait 100 ticks
     else:
         loop {_rewardReq::*}:
@@ -192,7 +192,15 @@ command /rename [<text>]:
         else:
             message "<bold> Can't name air."
 
-
+command togglejunk:
+    description: Toggle the picking up of junk like dirt and concrete powder
+    trigger:
+        if {pickupjunk::%player's uuid%} is not true:
+            set {pickupjunk::%player's uuid%} to true
+            send "You will now pick up 'junk' items."
+        else:
+            clear {pickupjunk::%player's uuid%}
+            send "You will no longer pick up 'junk' items."
 
 
 
@@ -429,4 +437,13 @@ on pick up:
             cancel event
     if event-item is respawn anchor:
         if {specialkitlist::%player's uuid%} is 1:
+            cancel event
+    if event-item is green concrete powder:
+        if {pickupjunk::%player's uuid%} is not true:
+            cancel event
+    if event-item is moss block:
+        if {pickupjunk::%player's uuid%} is not true:
+            cancel event
+    if event-item is dirt:
+        if {pickupjunk::%player's uuid%} is not true:
             cancel event
