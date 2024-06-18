@@ -49,9 +49,9 @@ on death of player:
 
     set {_drops::*} to drops  
     clear drops
-    drop {_drops::*} at victim
     loop {_drops::*}:
-        set velocity of loop-value to vector(0,0.5,%random integer between 0 and 10% / 10)
+        drop loop-value at victim
+        set velocity of last dropped item to vector(random number between 0 and 1, 1, random number between 0 and 1)
     clear {specialkitlist::%victim's uuid%}
     clear {godmode::%victim's uuid%}    
     #if {playerBounty::%victim's uuid%} is set:
@@ -204,11 +204,11 @@ command togglejunk:
             clear {pickupjunk::%player's uuid%}
             send "You will no longer pick up 'junk' items."
 
-
-while true:
-    wait 600 seconds
-    execute console command "tellraw @a ["",{"text":"Join the Discord! https://discord.gg/T5sXvgtW","color":"red","bold":true,"underlined":false,"clickEvent":{"action":"open_url","value":"https://discord.gg/T5sXvgtW"}}]"
-
+on join:
+    while player is connected:
+        wait 1 seconds
+        execute console command "tellraw %player% ["",{"text":"Join the Discord! Huge givaways! Click here!","color":"red","bold":true,"underlined":true,"clickEvent":{"action":"open_url","value":"https://discord.gg/T5sXvgtW"}}]"
+    
 
 
 
