@@ -205,7 +205,9 @@ command togglejunk:
             send "You will no longer pick up 'junk' items."
 
 
-
+while true:
+    wait 600 seconds
+    execute console command "tellraw @a ["",{"text":"Join the Discord! https://discord.gg/T5sXvgtW","color":"red","bold":true,"underlined":false,"clickEvent":{"action":"open_url","value":"https://discord.gg/T5sXvgtW"}}]"
 
 
 
