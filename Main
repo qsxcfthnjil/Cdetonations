@@ -3,8 +3,8 @@
 	
 options:
     rewardReq: 3, 5, 8, 10, 13, 15, 18 and 20
-    rewards: 32 experience bottle, 32 sunflower named "<reset><yellow>&lCoin", 64 experience bottle, 4 netherite ingot, 64 sunflower named "<reset><yellow>&lCoin", (1 diamond coast golden helmet of protection 9, unbreaking 99 and mending) named "<yellow><bold>CROWN", 2 paper named "<reset><red>&lKillstreak Voucher" and 6 paper named "<reset><red>&lKillstreak Voucher"
-    bounty: 10 sunflower named "<reset><yellow>&lCoin", 32 sunflower named "<reset><yellow>&lCoin", 48 sunflower named "<reset><yellow>&lCoin", 64 sunflower named "<reset><yellow>&lCoin", 2 paper named "<reset><red>&lKillstreak Voucher", 4 paper named "<reset><red>&lKillstreak Voucher", 5 paper named "<reset><red>&lKillstreak Voucher" and 6 paper named "<reset><red>&lKillstreak Voucher"
+    rewards: 64 experience bottle, 64 sunflower named "<reset><yellow>&lCoin", 128 experience bottle, 6 netherite ingot, 1 paper named "<reset><red>&lKillstreak Voucher", (1 diamond coast golden helmet of protection 9, unbreaking 99 and mending) named "<yellow><bold>CROWN", 4 paper named "<reset><red>&lKillstreak Voucher" and 6 paper named "<reset><red>&lKillstreak Voucher"
+    bounty: 32 sunflower named "<reset><yellow>&lCoin", 48 sunflower named "<reset><yellow>&lCoin", 64 sunflower named "<reset><yellow>&lCoin", 1 paper named "<reset><red>&lKillstreak Voucher", 2 paper named "<reset><red>&lKillstreak Voucher", 4 paper named "<reset><red>&lKillstreak Voucher", 5 paper named "<reset><red>&lKillstreak Voucher" and 6 paper named "<reset><red>&lKillstreak Voucher"
 function checkKS(p: player):
     set {_uuid} to {_p}'s uuid
     set {_rewardReq::*} to {@rewardReq}
@@ -51,7 +51,7 @@ on death of player:
     clear drops
     loop {_drops::*}:
         drop loop-value at victim
-        set velocity of last dropped item to vector(random number between 0 and 1, 1, random number between 0 and 1)
+        set velocity of last dropped item to vector(random number between 0 and 0.1, 0.1, random number between 0 and 0.1)
     clear {specialkitlist::%victim's uuid%}
     clear {godmode::%victim's uuid%}    
     #if {playerBounty::%victim's uuid%} is set:
@@ -204,11 +204,19 @@ command togglejunk:
             clear {pickupjunk::%player's uuid%}
             send "You will no longer pick up 'junk' items."
 
-on join:
-    while player is connected:
-        wait 1 seconds
-        execute console command "tellraw %player% ["",{"text":"Join the Discord! Huge givaways! Click here!","color":"red","bold":true,"underlined":true,"clickEvent":{"action":"open_url","value":"https://discord.gg/T5sXvgtW"}}]"
-    
+command /discord:
+    trigger:
+        send "&cJoin the discord! Huge Giveaways! &d&l&n<link:https://discord.gg/T5sXvgtW>ClICK" to player
+
+every 5 minutes:
+    loop all players:
+        send "&cUse &e/discord &cfor cool fun stuff and huge giveaways!" to loop-player
+
+
+
+
+
+
 
 
 
@@ -225,7 +233,7 @@ on join:
 
 
 on first join:
-    randomKit(player) 
+    randomKit(player)
 on respawn:
     wait 3 tick 
     randomKit(player) 
