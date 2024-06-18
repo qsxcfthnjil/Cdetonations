@@ -208,9 +208,9 @@ command /discord:
     trigger:
         send "&cJoin the discord! Huge Giveaways! &d&l&n<link:https://discord.gg/T5sXvgtW>ClICK" to player
 
-every 5 minutes:
+every 3 minutes:
     loop all players:
-        send "&cUse &e/discord &cfor cool fun stuff and huge giveaways!" to loop-player
+        send "<bold>&cUse <green>/discord &cfor huge giveaways and updates!" to loop-player
 
 
 
