@@ -232,8 +232,6 @@ every 3 minutes:
 
 
 
-on first join:
-    randomKit(player)
 on respawn:
     wait 3 tick 
     randomKit(player) 
