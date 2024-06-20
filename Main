@@ -252,8 +252,19 @@ on damage:
     apply glowing to victim for 5 seconds
     play sound "entity.player.levelup" to attacker
 
-
-
+on explode:
+    if event-entity is wither:
+        cancel the event
+        create an explosion of force 30 at event-location
+    if event-entity is fireball:
+        cancel the event
+        create an explosion of force 5 at event-location
+    if event-entity is explosive minecart:
+        cancel the event
+        create an explosion of force 10 at event-location
+    if event-entity is tnt:
+        cancel the event
+        create an explosion of force 11 at event-location
 
 
 
