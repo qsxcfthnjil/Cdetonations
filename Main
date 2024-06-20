@@ -246,7 +246,7 @@ on damage:
     metadata value "custom" of event-projectile is "<white><bold>AWP"
     cancel event
     kill event-projectile
-    damage victim by 10 hearts
+    damage victim by 14 hearts
     apply blindness 4 to victim for 2 seconds
     apply slowness 3 to victim for 5 seconds
     apply glowing to victim for 5 seconds
