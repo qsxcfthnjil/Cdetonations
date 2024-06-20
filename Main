@@ -255,7 +255,7 @@ on damage:
 on explode:
     if event-entity is wither:
         cancel the event
-        create an explosion of force 30 at event-location
+        create an explosion of force 50 at event-location
     if event-entity is fireball:
         cancel the event
         create an explosion of force 5 at event-location
@@ -471,7 +471,7 @@ function randomKit(p: player):
     set slot 7 of {_p}'s inventory to totem of undying of curse of vanishing
 
 
-    set {_specialkit} to random integer between 1 and 101
+    set {_specialkit} to random integer between 1 and 102
     if {_specialkit} is 100:
         set {specialkitlist::%{_p}'s uuid%} to 1
         broadcast "<red><bold><italic>%{_p}% Has randomly recieved a DIVINE BLESSING: Fallen Armsman"
