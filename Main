@@ -484,7 +484,7 @@ function randomKit(p: player):
         set {_p}'s leggings to chainmail leggings of blast protection 5 and protection 2 and curse of vanishing and curse of binding
         set {_p}'s boots to chainmail boots of blast protection 5 and protection 2 and curse of vanishing and curse of binding
 
-    if {_specialkit::%{_p}'s uuid%} is 101:
+    if {_specialkit} is 101:
         set {specialkitlist::%{_p}'s uuid%} to 1
         broadcast "<red><bold><italic>%{_p}% Has randomly recieved a DIVINE BLESSING: Swordsman of the Abyss"
         set slot 0 of {_p}'s inventory to (netherite sword of sharpness 5 and sweeping edge 3 and fire aspect 2) named "<grey><bold>Starless Night"
