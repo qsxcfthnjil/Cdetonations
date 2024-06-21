@@ -233,9 +233,6 @@ command /rekit:
             randomKit(player)
         else:
             send "You need to hold 3 coins to reroll"
-
-
-
 on shoot:
     shooter is a player
     name of shooter's held item is "<white><bold>AWP"
@@ -267,7 +264,12 @@ on explode:
         create an explosion of force 11 at event-location
 
 
-
+on teleport:
+    set {_lastTeleportLocation} to location of player
+    wait 2 ticks  
+    
+    if {_lastTeleportLocation} is not location of player:
+        damage the player by 1
 
 
 
@@ -294,9 +296,18 @@ on explode:
 
 on first join:
     set {freerekit::%player's uuid%} to true
-
-
-
+    set {firstjoin} to player
+    set {firstjointimer} to 0
+    while {firstjointimer} is smaller than 30:
+        wait 1 second
+        add 1 to {firstjointimer}
+        if {firstjointimer} is 30:
+            clear {firstjointimer}
+on chat:
+    if message contains "%{firstjoin}%":
+        if {firstjointimer} is smaller than 30:
+            give player 16 sunflowers named "<yellow><bold>Coin"
+            send "&dYou recieved 16 coins for welcoming a new player! :D"
 
 on respawn:
     wait 3 tick 
