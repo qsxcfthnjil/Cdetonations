@@ -272,7 +272,11 @@ on teleport:
         damage the player by 1
 
 
-
+on projectile hit:
+    if name of shooter's tool contains "<red><bold><italic>Boom<white><bold><italic>Bow":
+        delete projectile
+        wait 1 tick
+        create explosion of force 2.7 at location
 
 
 
@@ -303,11 +307,14 @@ on first join:
         add 1 to {firstjointimer}
         if {firstjointimer} is 30:
             clear {firstjointimer}
+            clear {playerwelcomecooldown::*}
 on chat:
     if message contains "%{firstjoin}%":
         if {firstjointimer} is smaller than 30:
-            give player 16 sunflowers named "<yellow><bold>Coin"
-            send "&dYou recieved 16 coins for welcoming a new player! :D"
+            if {playerwelcomecooldown::%player's uuid%} is not set:
+                give player 16 sunflowers named "<reset><yellow><bold>Coin"
+                send "&dYou recieved 16 coins for welcoming a new player! :D"
+                set {playerwelcomecooldown::%player's uuid%} to true
 
 on respawn:
     wait 3 tick 
