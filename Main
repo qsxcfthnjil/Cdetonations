@@ -249,6 +249,14 @@ on damage:
     apply glowing to victim for 5 seconds
     play sound "entity.player.levelup" to attacker
 
+on damage:
+    if damage cause is a projectile:
+        if attacker is holding a bow named "<white><bold>AA-12":
+            set maximum damage delay of victim to 0 seconds
+            wait 3 tick
+            set damage delay of victim to 0.5 seconds
+     
+
 on explode:
     if event-entity is wither:
         cancel the event
@@ -278,16 +286,62 @@ on projectile hit:
         wait 1 tick
         create explosion of force 2.7 at location
 
-
-
-
-
-
-
-
-
-
-
+on entity shoot bow:
+    if name of shooter's tool contains "<white><bold>AA-12":
+        cancel event
+        if player has 20 arrows:
+            remove 20 arrows from player's inventory
+            make the player shoot an arrow at speed 4
+            make the player shoot an arrow at speed 4
+            push last shot projectile right at speed 0.7
+            make the player shoot an arrow at speed 4
+            push last shot projectile left at speed 0.7
+            make the player shoot an arrow at speed 4
+            push last shot projectile upwards at speed 0.7
+            make the player shoot an arrow at speed 4
+            push last shot projectile downwards at speed 0.7
+            make the player shoot an arrow at speed 4
+            push last shot projectile downwards at speed 0.7
+            push last shot projectile left at speed 0.7
+            make the player shoot an arrow at speed 4
+            push last shot projectile downwards at speed 0.7
+            push last shot projectile right at speed 0.7
+            make the player shoot an arrow at speed 4
+            push last shot projectile upwards at speed 0.7
+            push last shot projectile left at speed 0.7
+            make the player shoot an arrow at speed 4
+            push last shot projectile upwards at speed 0.7
+            push last shot projectile right at speed 0.7
+    
+            make the player shoot an arrow at speed 4
+            push last shot projectile right at speed 1.2
+            make the player shoot an arrow at speed 4
+            push last shot projectile left at speed 1.2
+            make the player shoot an arrow at speed 4
+            push last shot projectile upwards at speed 1.2
+            make the player shoot an arrow at speed 4
+            push last shot projectile downwards at speed 1.2
+            make the player shoot an arrow at speed 4
+            push last shot projectile downwards at speed 1.2
+            push last shot projectile left at speed 1.2
+            make the player shoot an arrow at speed 4
+            push last shot projectile downwards at speed 1.2
+            push last shot projectile right at speed 1.2
+            make the player shoot an arrow at speed 4
+            push last shot projectile upwards at speed 1.2
+            push last shot projectile left at speed 1.2
+            make the player shoot an arrow at speed 4
+            push last shot projectile upwards at speed 1.2
+            push last shot projectile right at speed 1.2
+        else:
+            send "You need at least 20 regular arrows" to player
+    
+    
+    
+    
+    
+    
+    
 
 
 
@@ -547,12 +601,9 @@ on pick up:
     if event-item is raw iron:
         if {pickupores::%player's uuid%} is not true:
             cancel event
-            send "Picking up junk ores is toggled off. Use /toggleores" to player
     if event-item is coal:
         if {pickupores::%player's uuid%} is not true:
             cancel event
-            send "Picking up junk ores is toggled off. Use /toggleores" to player
     if event-item is cobblestone:
         if {pickupores::%player's uuid%} is not true:
             cancel event
-            send "Picking up junk ores is toggled off. Use /toggleores" to player
