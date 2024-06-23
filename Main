@@ -154,6 +154,8 @@ command /test:
         set slot 0 of player's inventory to sunflower named "<reset><yellow>&lCoin"
         set slot 1 of player's inventory to paper named "<red><bold>Currently DISABLED until balancing is complete"
         set slot 2 of player's inventory to 2 paper named "<reset><red>&lKillstreak Voucher"
+        set slot 3 of player's inventory to 1 amethyst shard named "<reset><purple><bold>Weekly Token - Week 1"
+
 
 command testspecialkit <player=%player%>:
     permission: skript.admin
