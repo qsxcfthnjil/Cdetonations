@@ -248,7 +248,7 @@ on damage:
     metadata value "custom" of event-projectile is "<white><bold>AWP"
     cancel event
     kill event-projectile
-    damage victim by 16 hearts
+    damage victim by 18 hearts
     apply blindness 4 to victim for 2 seconds
     apply slowness 3 to victim for 2 seconds
     apply glowing to victim for 5 seconds
@@ -260,7 +260,7 @@ on damage:
             set maximum damage delay of victim to 0 seconds
             wait 3 tick
             set damage delay of victim to 0.5 seconds
-        if attacker is holding a crossbow named "<white><bold>Remington 870":
+        if name of attacker's tool contains "<white><bold>Remington 870":
             set maximum damage delay of victim to 0 seconds
             wait 3 tick
             set damage delay of victim to 0.5 seconds     
@@ -304,46 +304,46 @@ on entity shoot bow:
         wait 1 tick
         if player has 20 arrows:
             remove 20 arrows from player's inventory
-            make the player shoot an arrow at speed 1
-            make the player shoot an arrow at speed 1
+            make the player shoot an arrow at speed 2
+            make the player shoot an arrow at speed 2
             push last shot projectile right at speed 0.05
-            make the player shoot an arrow at speed 1
+            make the player shoot an arrow at speed 2
             push last shot projectile left at speed 0.05
-            make the player shoot an arrow at speed 1
+            make the player shoot an arrow at speed 2
             push last shot projectile upwards at speed 0.05
-            make the player shoot an arrow at speed 1
+            make the player shoot an arrow at speed 2
             push last shot projectile downwards at speed 0.05
-            make the player shoot an arrow at speed 1
+            make the player shoot an arrow at speed 2
             push last shot projectile downwards at speed 0.05
             push last shot projectile left at speed 0.05
-            make the player shoot an arrow at speed 1
+            make the player shoot an arrow at speed 2
             push last shot projectile downwards at speed 0.05
             push last shot projectile right at speed 0.05
-            make the player shoot an arrow at speed 1
+            make the player shoot an arrow at speed 2
             push last shot projectile upwards at speed 0.05
             push last shot projectile left at speed 0.05
-            make the player shoot an arrow at speed 1
+            make the player shoot an arrow at speed 2
             push last shot projectile upwards at speed 0.05
             push last shot projectile right at speed 0.05
     
-            make the player shoot an arrow at speed 1
+            make the player shoot an arrow at speed 2
             push last shot projectile right at speed 0.1
-            make the player shoot an arrow at speed 1
+            make the player shoot an arrow at speed 2
             push last shot projectile left at speed 0.1
-            make the player shoot an arrow at speed 1
+            make the player shoot an arrow at speed 2
             push last shot projectile upwards at speed 0.1
-            make the player shoot an arrow at speed 1
+            make the player shoot an arrow at speed 2
             push last shot projectile downwards at speed 0.1
-            make the player shoot an arrow at speed 1
+            make the player shoot an arrow at speed 2
             push last shot projectile downwards at speed 0.1
             push last shot projectile left at speed 0.1
-            make the player shoot an arrow at speed 1
+            make the player shoot an arrow at speed 2
             push last shot projectile downwards at speed 0.1
             push last shot projectile right at speed 0.1
-            make the player shoot an arrow at speed 1
+            make the player shoot an arrow at speed 2
             push last shot projectile upwards at speed 0.1
             push last shot projectile left at speed 0.1
-            make the player shoot an arrow at speed 1
+            make the player shoot an arrow at speed 2
             push last shot projectile upwards at speed 0.1
             push last shot projectile right at speed 0.1
         else:
