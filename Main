@@ -2,9 +2,9 @@
 
 	
 options:
-    rewardReq: 3, 5, 8, 10, 13, 15, 18, 20, 25, 30, 35, 40, 45 and 50
-    rewards: 64 experience bottle, 64 sunflower named "<reset><yellow>&lCoin", 128 experience bottle, 6 netherite ingot, 1 paper named "<reset><red>&lKillstreak Voucher", (1 of unbreakable diamond coast golden helmet of protection 9, unbreaking 255 and mending) named "<yellow><bold>CROWN", 4 paper named "<reset><red>&lKillstreak Voucher", 6 paper named "<reset><red>&lKillstreak Voucher", 7 paper named "<reset><red>&lKillstreak Voucher", 8 paper named "<reset><red>&lKillstreak Voucher", 9 paper named "<reset><red>&lKillstreak Voucher", 10 paper named "<reset><red>&lKillstreak Voucher", 10 paper named "<reset><red>&lKillstreak Voucher" and 15 paper named "<reset><red>&lKillstreak Voucher"
-    bounty: 32 sunflower named "<reset><yellow>&lCoin", 48 sunflower named "<reset><yellow>&lCoin", 64 sunflower named "<reset><yellow>&lCoin", 1 paper named "<reset><red>&lKillstreak Voucher", 2 paper named "<reset><red>&lKillstreak Voucher", 4 paper named "<reset><red>&lKillstreak Voucher", 5 paper named "<reset><red>&lKillstreak Voucher", 6 paper named "<reset><red>&lKillstreak Voucher", 7 paper named "<reset><red>&lKillstreak Voucher", 8 paper named "<reset><red>&lKillstreak Voucher", 4 paper named "<reset><red>&lKillstreak Voucher", 9 paper named "<reset><red>&lKillstreak Voucher", 10 paper named "<reset><red>&lKillstreak Voucher" and 20 paper named "<reset><red>&lKillstreak Voucher"
+    rewardReq: 3, 5, 8, 10, 13, 15, 18, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75, 80, 85, 90, 95 and 100
+    rewards: 64 experience bottle, 64 sunflower named "<reset><yellow>&lCoin", 128 experience bottle, 6 netherite ingot, 1 paper named "<reset><red>&lKillstreak Voucher", (1 of unbreakable diamond coast golden helmet of protection 9, unbreaking 255 and mending) named "<yellow><bold>CROWN", 4 paper named "<reset><red>&lKillstreak Voucher", 6 paper named "<reset><red>&lKillstreak Voucher", 7 paper named "<reset><red>&lKillstreak Voucher", 8 paper named "<reset><red>&lKillstreak Voucher", 9 paper named "<reset><red>&lKillstreak Voucher", 10 paper named "<reset><red>&lKillstreak Voucher", 10 paper named "<reset><red>&lKillstreak Voucher", 15 paper named "<reset><red>&lKillstreak Voucher", 15 paper named "<reset><red>&lKillstreak Voucher", 15 paper named "<reset><red>&lKillstreak Voucher", 15 paper named "<reset><red>&lKillstreak Voucher", 15 paper named "<reset><red>&lKillstreak Voucher", 15 paper named "<reset><red>&lKillstreak Voucher", 15 paper named "<reset><red>&lKillstreak Voucher", 15 paper named "<reset><red>&lKillstreak Voucher", 15 paper named "<reset><red>&lKillstreak Voucher", 15 paper named "<reset><red>&lKillstreak Voucher" and 15 paper named "<reset><red>&lKillstreak Voucher"
+    bounty: 32 sunflower named "<reset><yellow>&lCoin", 48 sunflower named "<reset><yellow>&lCoin", 64 sunflower named "<reset><yellow>&lCoin", 1 paper named "<reset><red>&lKillstreak Voucher", 2 paper named "<reset><red>&lKillstreak Voucher", 4 paper named "<reset><red>&lKillstreak Voucher", 5 paper named "<reset><red>&lKillstreak Voucher", 6 paper named "<reset><red>&lKillstreak Voucher", 7 paper named "<reset><red>&lKillstreak Voucher", 8 paper named "<reset><red>&lKillstreak Voucher", 4 paper named "<reset><red>&lKillstreak Voucher", 9 paper named "<reset><red>&lKillstreak Voucher", 10 paper named "<reset><red>&lKillstreak Voucher", 20 paper named "<reset><red>&lKillstreak Voucher", 30 paper named "<reset><red>&lKillstreak Voucher", 40 paper named "<reset><red>&lKillstreak Voucher", 50 paper named "<reset><red>&lKillstreak Voucher", 60 paper named "<reset><red>&lKillstreak Voucher", 70 paper named "<reset><red>&lKillstreak Voucher", 80 paper named "<reset><red>&lKillstreak Voucher", 90 paper named "<reset><red>&lKillstreak Voucher", 100 paper named "<reset><red>&lKillstreak Voucher", 110 paper named "<reset><red>&lKillstreak Voucher" and 128 paper named "<reset><red>&lKillstreak Voucher",
 function checkKS(p: player):
     set {_uuid} to {_p}'s uuid
     set {_rewardReq::*} to {@rewardReq}
@@ -248,15 +248,15 @@ on damage:
     metadata value "custom" of event-projectile is "<white><bold>AWP"
     cancel event
     kill event-projectile
-    damage victim by 18 hearts
+    damage victim by 15 hearts
     apply blindness 4 to victim for 2 seconds
     apply slowness 3 to victim for 2 seconds
     apply glowing to victim for 5 seconds
     play sound "entity.player.levelup" to attacker
 
 on damage:
-    if damage cause is a projectile:
-        if attacker is holding a bow named "<white><bold>AA-12":
+    if "%damage cause%" is "projectile":
+        if name of attacker's tool contains "<white><bold>AA-12":
             set maximum damage delay of victim to 0 seconds
             wait 3 tick
             set damage delay of victim to 0.5 seconds
@@ -268,7 +268,7 @@ on damage:
 on explode:
     if event-entity is wither:
         cancel the event
-        create an explosion of force 50 at event-location
+        create an explosion of force 70 at event-location
     if event-entity is fireball:
         cancel the event
         create an explosion of force 5 at event-location
@@ -278,6 +278,9 @@ on explode:
     if event-entity is tnt:
         cancel the event
         create an explosion of force 11 at event-location
+    if event-entity is creeper:
+        cancel the event
+        create an explosion of force 15 at event-location
 
 
 on teleport:
@@ -363,7 +366,7 @@ on entity shoot bow:
             push last shot projectile downwards at speed 0.1
             make the player shoot an arrow at speed 1
             push last shot projectile downwards at speed 0.1
-            push last shot projectile left at speed 0.3
+            push last shot projectile left at speed 0.1
             make the player shoot an arrow at speed 1
             push last shot projectile downwards at speed 0.1
             push last shot projectile right at speed 0.1
@@ -375,30 +378,30 @@ on entity shoot bow:
             push last shot projectile right at speed 0.1
     
             make the player shoot an arrow at speed 1
-            push last shot projectile right at speed 0.3
+            push last shot projectile right at speed 0.2
             make the player shoot an arrow at speed 1
-            push last shot projectile left at speed 0.3
+            push last shot projectile left at speed 0.2
             make the player shoot an arrow at speed 1
-            push last shot projectile upwards at speed 0.3
+            push last shot projectile upwards at speed 0.2
             make the player shoot an arrow at speed 1
-            push last shot projectile downwards at speed 0.3
+            push last shot projectile downwards at speed 0.2
             make the player shoot an arrow at speed 1
-            push last shot projectile downwards at speed 0.3
-            push last shot projectile left at speed 0.3
+            push last shot projectile downwards at speed 0.2
+            push last shot projectile left at speed 0.2
             make the player shoot an arrow at speed 1
-            push last shot projectile downwards at speed 0.3
-            push last shot projectile right at speed 0.3
+            push last shot projectile downwards at speed 0.2
+            push last shot projectile right at speed 0.2
             make the player shoot an arrow at speed 1
-            push last shot projectile upwards at speed 0.3
-            push last shot projectile left at speed 0.3
+            push last shot projectile upwards at speed 0.2
+            push last shot projectile left at speed 0.2
             make the player shoot an arrow at speed 1
-            push last shot projectile upwards at speed 0.3
-            push last shot projectile right at speed 0.3
+            push last shot projectile upwards at speed 0.2
+            push last shot projectile right at speed 0.2
         else:
             send "You need at least 20 regular arrows" to player
     else if name of shooter's tool contains "<white><bold>AWP":
         cancel event
-        make the player shoot an arrow at speed 8
+        make the player shoot an arrow at speed 6
     
     
 command /eredeem:
