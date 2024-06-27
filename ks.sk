@@ -221,7 +221,7 @@ command toggleores:
 
 command /discord:
     trigger:
-        send "&cJoin the discord! Huge Giveaways! &d&l&n<link:https://discord.gg/wSGnBchx>ClICK" to player
+        send "&cJoin the discord! Huge Giveaways! &d&l&n<link:https://discord.gg/yffwheQ8>ClICK" to player
 
 every 3 minutes:
     loop all players:
