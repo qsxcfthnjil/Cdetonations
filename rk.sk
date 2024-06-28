@@ -8,7 +8,7 @@ command /norekit <player>:
     
 
 on damage:
-    if victim is an item:
+    if victim is a dropped item:
         if damage cause is not lava:
             cancel event
 
