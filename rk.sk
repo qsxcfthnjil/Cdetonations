@@ -1,0 +1,280 @@
+command /norekit <player>:
+    permission: op
+    trigger:
+        set {norekit} to arg-1's uuid
+        broadcast "NO rekit successful"
+        wait 5 second
+        clear {norekit}
+    
+
+on damage:
+    if victim is an item:
+        if damage cause is not lava:
+            cancel event
+
+
+
+
+
+
+on first join:
+    set {freerekit::%player's uuid%} to true
+    set {firstjoin} to player
+    set {firstjointimer} to 0
+    while {firstjointimer} is smaller than 30:
+        wait 1 second
+        add 1 to {firstjointimer}
+        if {firstjointimer} is 30:
+            clear {firstjointimer}
+            clear {playerwelcomecooldown::*}
+on chat:
+    if message contains "%{firstjoin}%":
+        if {firstjointimer} is smaller than 30:
+            if {playerwelcomecooldown::%player's uuid%} is not set:
+                give player 16 sunflowers named "<reset><yellow><bold>Coin"
+                send "&dYou recieved 16 coins for welcoming a new player! :D"
+                set {playerwelcomecooldown::%player's uuid%} to true
+
+on respawn:
+    wait 6 seconds
+    {norekit} is not player's uuid
+    randomKit(player)
+    if {event1::%player's uuid%} is set:
+        give player (amethyst silence netherite boots of protection 3 and unbreaking 3 and mending and curse of vanishing) named "<dark gray><bold>Permanent Boots"
+
+
+function randomKit(p: player):
+    set {_Helmet} to random integer between 1 and 3
+    if {_Helmet} is 1:
+        set {_p}'s helmet to iron helmet of protection 4 and unbreaking 3 and curse of vanishing
+    else if {_Helmet} is 2:
+        set {_p}'s helmet to diamond helmet of protection 2 and unbreaking 3 and curse of vanishing
+    else if {_Helmet} is 3:
+        set {_p}'s helmet to diamond helmet of protection 3 and mending
+    else if {_Helmet} is 4:
+        set {_p}'s helmet to gold helmet of protection 10 and unbreaking 3
+
+    set {_Chestplate} to random integer between 1 and 4
+    if {_Chestplate} is 1:
+        set {_p}'s Chestplate to iron Chestplate of protection 4 and unbreaking 3 and curse of vanishing
+    else if {_Chestplate} is 2:
+        set {_p}'s Chestplate to diamond Chestplate of protection 2 and unbreaking 3 and curse of vanishing
+    else if {_Chestplate} is 3:
+        set {_p}'s Chestplate to diamond Chestplate of protection 3 and mending
+    else if {_Chestplate} is 4:
+        set {_p}'s Chestplate to gold Chestplate of protection 10 and unbreaking 3 and curse of vanishing
+    
+    set {_Leggings} to random integer between 1 and 4
+    if {_Leggings} is 1:
+        set {_p}'s Leggings to iron Leggings of protection 4 and unbreaking 3 and blast protection 4 and curse of vanishing
+    else if {_Leggings} is 2:
+        set {_p}'s Leggings to diamond Leggings of protection 2 and unbreaking 3 and blast protection 2 and curse of vanishing
+    else if {_Leggings} is 3:
+        set {_p}'s Leggings to diamond Leggings of blast protection 3 and mending
+    else if {_Leggings} is 4:
+        set {_p}'s Leggings to gold Leggings of protection 10 and unbreaking 3 and blast protection 4 and curse of vanishing
+    set {_Boots} to random integer between 1 and 4
+    if {_Boots} is 1:
+        set {_p}'s Boots to iron Boots of protection 4 and unbreaking 3 and curse of vanishing
+    else if {_Boots} is 2:
+        set {_p}'s Boots to diamond Boots of protection 2 and unbreaking 3 and curse of vanishing
+    else if {_Boots} is 3:
+        set {_p}'s Boots to diamond Boots of protection 3 and mending
+    else if {_Boots} is 4:
+        set {_p}'s Boots to gold Boots of protection 10 and unbreaking 3 and curse of vanishing
+    
+    set {_Sword} to random integer between 1 and 4 
+    if {_Sword} is 1:
+        set slot 0 of {_p}'s inventory to iron sword of sharpness 2 and knockback 2 and curse of vanishing
+    else if {_Sword} is 2:
+        set slot 0 of {_p}'s inventory to diamond sword of sharpness 3 and knockback 1 and curse of vanishing
+    else if {_Sword} is 3:
+        set slot 0 of {_p}'s inventory to diamond sword of sharpness 3 and sweeping edge 3 and fire aspect 2 and curse of vanishing
+    else if {_Sword} is 4:
+        set slot 0 of {_p}'s inventory to diamond sword of sharpness 1 and curse of vanishing
+
+    set {_Util} to random integer between 1 and 3
+	
+    if {_Util} is 1:
+        set {_Pickaxe} to random integer between 1 and 4 
+        if {_Pickaxe} is 1:
+            set slot 6 of {_p}'s inventory to iron Pickaxe of efficiency 1 and fortune 3 and curse of vanishing
+        else if {_Pickaxe} is 2:
+            set slot 6 of {_p}'s inventory to diamond Pickaxe of efficiency 3 and curse of vanishing
+        else if {_Pickaxe} is 3:
+            set slot 6 of {_p}'s inventory to diamond Pickaxe of efficiency 5
+        else if {_Pickaxe} is 4:
+            set slot 6 of {_p}'s inventory to diamond Pickaxe of fortune 3
+
+    if {_Util} is 2:
+        set {_Bow} to random integer between 1 and 5 
+        if {_Bow} is 6:
+            set slot 7 of {_p}'s inventory to bow of power 4 and curse of vanishing
+        else if {_Bow} is 2:
+            set slot 6 of {_p}'s inventory to bow of power 3 and curse of vanishing
+        else if {_Bow} is 3:
+            set slot 6 of {_p}'s inventory to bow of punch 2 and curse of vanishing
+        set slot 17 of {_p}'s inventory to 6 of tipped arrow of slow falling
+
+    if {_Util} is 3:
+        set {_Shield} to random integer between 1 and 3
+        if {_Shield} is 1:
+            set {_item} to shield of unbreaking 3
+            set durability of {_item} to 100
+            set slot 6 of {_p}'s inventory to {_item}
+        if {_Shield} is 2:
+            set {_item} to shield
+            set durability of {_item} to 100
+            set slot 6 of {_p}'s inventory to {_item}
+        if {_Shield} is 3:
+            set {_item} to shield
+            set durability of {_item} to 150
+            set slot 6 of {_p}'s inventory to {_item}
+    set {_Food} to random integer between 1 and 3
+    if {_Food} is 1:
+        set slot 8 of {_p}'s inventory to 16 of golden carrot of curse of vanishing
+    else if {_Food} is 2:
+        set slot 8 of {_p}'s inventory to 32 of steak of curse of vanishing
+    else if {_Food} is 3:
+        set slot 8 of {_p}'s inventory to 16 of golden apple 
+		
+    set {_Epearl} to random integer between 1 and 3
+    if {_Epearl} is 1:
+        set slot 1 of {_p}'s inventory to 4 of ender pearl
+    else if {_Epearl} is 2:
+        set slot 1 of {_p}'s inventory to 8 of ender pearl
+    else if {_Epearl} is 3:
+        set slot 1 of {_p}'s inventory to 16 of ender pearl
+		
+    set {_Weapon} to random integer between 1 and 3
+    if {_Weapon} is 1:
+        set slot 2 of {_p}'s inventory to 16 of end crystal
+        set slot 3 of {_p}'s inventory to 20 of obsidian
+        set slot 4 of {_p}'s inventory to 10 of glowstone
+        set slot 5 of {_p}'s inventory to 5 of respawn anchor
+    else if {_Weapon} is 2:
+        set slot 2 of {_p}'s inventory to 32 of End Crystal
+        set slot 3 of {_p}'s inventory to 40 of Obsidian
+    else if {_Weapon} is 3:
+        set slot 4 of {_p}'s inventory to 20 of glowstone
+        set slot 5 of {_p}'s inventory to 15 of respawn anchor
+        set slot 3 of {_p}'s inventory to 64 of cobblestone of curse of vanishing
+		
+    set the off hand item of {_p} to totem of undying of curse of vanishing
+    set {_totems} to random integer between 3 and 8
+    if {_totems} is 3:
+        set slot 9 of {_p}'s inventory to totem of undying of curse of vanishing
+        set slot 10 of {_p}'s inventory to totem of undying of curse of vanishing
+        set slot 11 of {_p}'s inventory to totem of undying
+        set slot 26 of {_p}'s inventory to wooden axe of curse of vanishing
+    if {_totems} is 4:
+        set slot 9 of {_p}'s inventory to totem of undying of curse of vanishing
+        set slot 10 of {_p}'s inventory to totem of undying of curse of vanishing
+        set slot 11 of {_p}'s inventory to totem of undying of curse of vanishing
+        set slot 12 of {_p}'s inventory to totem of undying
+        set slot 26 of {_p}'s inventory to stone axe of curse of vanishing
+    if {_totems} is 5:
+        set slot 9 of {_p}'s inventory to totem of undying of curse of vanishing
+        set slot 10 of {_p}'s inventory to totem of undying of curse of vanishing
+        set slot 11 of {_p}'s inventory to totem of undying of curse of vanishing
+        set slot 12 of {_p}'s inventory to totem of undying of curse of vanishing
+        set slot 13 of {_p}'s inventory to totem of undying
+        set slot 26 of {_p}'s inventory to iron axe of curse of vanishing
+    if {_totems} is 6:
+        set slot 9 of {_p}'s inventory to totem of undying of curse of vanishing
+        set slot 10 of {_p}'s inventory to totem of undying of curse of vanishing
+        set slot 11 of {_p}'s inventory to totem of undying of curse of vanishing
+        set slot 12 of {_p}'s inventory to totem of undying of curse of vanishing
+        set slot 13 of {_p}'s inventory to totem of undying of curse of vanishing
+        set slot 14 of {_p}'s inventory to totem of undying
+        set slot 26 of {_p}'s inventory to diamond axe
+    if {_totems} is 7:
+        set slot 9 of {_p}'s inventory to totem of undying of curse of vanishing
+        set slot 10 of {_p}'s inventory to totem of undying of curse of vanishing
+        set slot 11 of {_p}'s inventory to totem of undying of curse of vanishing
+        set slot 12 of {_p}'s inventory to totem of undying of curse of vanishing
+        set slot 13 of {_p}'s inventory to totem of undying of curse of vanishing
+        set slot 14 of {_p}'s inventory to totem of undying of curse of vanishing
+        set slot 15 of {_p}'s inventory to totem of undying of curse of vanishing
+    if {_totems} is 8:
+        set slot 9 of {_p}'s inventory to totem of undying of curse of vanishing
+        set slot 10 of {_p}'s inventory to totem of undying of curse of vanishing
+        set slot 11 of {_p}'s inventory to totem of undying of curse of vanishing
+        set slot 12 of {_p}'s inventory to totem of undying of curse of vanishing
+        set slot 13 of {_p}'s inventory to totem of undying of curse of vanishing
+        set slot 14 of {_p}'s inventory to totem of undying of curse of vanishing
+        set slot 15 of {_p}'s inventory to totem of undying of curse of vanishing
+        set slot 16 of {_p}'s inventory to totem of undying
+    set slot 7 of {_p}'s inventory to totem of undying of curse of vanishing
+
+
+    set {_specialkit} to random integer between 1 and 102
+    if {_specialkit} is 100:
+        set {specialkitlist::%{_p}'s uuid%} to 1
+        broadcast "<red><bold><italic>%{_p}% Has randomly recieved a DIVINE BLESSING: Fallen Armsman"
+        set slot 0 of {_p}'s inventory to crossbow of piercing 10 and curse of vanishing named "<white><bold>AWP"
+        set the off hand item of {_p} to crossbow of quick charge 5 named "<grey><bold>M4A1"
+        set slot 2 of {_p}'s inventory to 64 of tipped arrow of harming 
+        set slot 3 of {_p}'s inventory to 64 of tipped arrow of harming 
+        set {_p}'s helmet to chainmail helmet of blast protection 5 and protection 2 and curse of vanishing and curse of binding
+        set {_p}'s chestplate to chainmail chestplate of blast protection 5 and protection 2 and curse of vanishing and curse of binding
+        set {_p}'s leggings to chainmail leggings of blast protection 5 and protection 2 and curse of vanishing and curse of binding
+        set {_p}'s boots to chainmail boots of blast protection 5 and protection 2 and curse of vanishing and curse of binding
+
+    if {_specialkit} is 101:
+        set {specialkitlist::%{_p}'s uuid%} to 1
+        broadcast "<red><bold><italic>%{_p}% Has randomly recieved a DIVINE BLESSING: Swordsman of the Abyss"
+        set slot 0 of {_p}'s inventory to (netherite sword of sharpness 5 and sweeping edge 3 and fire aspect 2) named "<grey><bold>Starless Night"
+        set slot 1 of {_p}'s inventory to 16 of ender pearl
+        set slot 2 of {_p}'s inventory to splash potion of strong strength
+        set slot 3 of {_p}'s inventory to splash potion of strong speed
+        set slot 4 of {_p}'s inventory to splash potion of strong strength
+        set slot 5 of {_p}'s inventory to splash potion of strong speed
+        set slot 6 of {_p}'s inventory to splash potion of strong strength
+        set slot 7 of {_p}'s inventory to splash potion of strong speed
+        set slot 8 of {_p}'s inventory to 64 of golden apple
+        set slot 9 of {_p}'s inventory to splash potion of strong turtle master
+        set slot 10 of {_p}'s inventory to splash potion of strong turtle master
+        set slot 11 of {_p}'s inventory to splash potion of strong turtle master
+        set slot 12 of {_p}'s inventory to splash potion of strong turtle master
+        set slot 13 of {_p}'s inventory to splash potion of strong turtle master
+        set slot 14 of {_p}'s inventory to splash potion of strong turtle master
+        set slot 15 of {_p}'s inventory to splash potion of strong turtle master
+        set {_p}'s helmet to red silence netherite helmet of protection 3 and unbreaking 3 and curse of binding
+        set {_p}'s chestplate to red silence netherite chestplate of protection 3 and unbreaking 3 and curse of binding
+        set {_p}'s leggings to red silence netherite leggings of protection 3 and blast protection 3 and unbreaking 3 and curse of binding
+        set {_p}'s boots to red silence netherite boots of protection 3 and unbreaking 3 and curse of binding
+on pick up:
+    if event-item is end crystal:
+        if {specialkitlist::%player's uuid%} is 1:
+            cancel event
+    if event-item is respawn anchor:
+        if {specialkitlist::%player's uuid%} is 1:
+            cancel event
+    if event-item is green concrete powder:
+        if {pickupjunk::%player's uuid%} is not true:
+            cancel event
+    if event-item is moss block:
+        if {pickupjunk::%player's uuid%} is not true:
+            cancel event
+    if event-item is dirt:
+        if {pickupjunk::%player's uuid%} is not true:
+            cancel event
+    if event-item is glowstone dust:
+        if {pickupjunk::%player's uuid%} is not true:
+            cancel event
+    if event-item is tuff:
+        if {pickupjunk::%player's uuid%} is not true:
+            cancel event
+    if event-item is raw iron:
+        if {pickupores::%player's uuid%} is not true:
+            cancel event
+    if event-item is coal:
+        if {pickupores::%player's uuid%} is not true:
+            cancel event
+    if event-item is cobblestone:
+        if {pickupores::%player's uuid%} is not true:
+            cancel event
+    if event-item is cobbled deepslate:
+        if {pickupores::%player's uuid%} is not true:
+            cancel event
