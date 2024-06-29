@@ -9,6 +9,13 @@ command /norekit <player>:
 
 on damage:
     if victim is a dropped item:
+        victim is not dropped moss block
+        victim is not dropped cobblestone
+        victim is not dropped totem of undying
+        victim is not dropped coal
+        victim is not dropped green concrete powder
+        victim is not dropped dirt
+        victim is not dropped glowstone dust
         if damage cause is not lava:
             cancel event
 
@@ -36,11 +43,12 @@ on chat:
                 set {playerwelcomecooldown::%player's uuid%} to true
 
 on respawn:
-    wait 6 seconds
-    {norekit} is not player's uuid
-    randomKit(player)
-    if {event1::%player's uuid%} is set:
-        give player (amethyst silence netherite boots of protection 3 and unbreaking 3 and mending and curse of vanishing) named "<dark gray><bold>Permanent Boots"
+	if respawn reason = death respawn:
+        wait 6 seconds
+        {norekit} is not player's uuid
+        randomKit(player)
+        if {event1::%player's uuid%} is set:
+            give player (amethyst silence netherite boots of protection 3 and unbreaking 3 and mending and curse of vanishing) named "<dark gray><bold>Permanent Boots"
 
 
 function randomKit(p: player):
