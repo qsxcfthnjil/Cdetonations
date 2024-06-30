@@ -43,7 +43,7 @@ on chat:
                 set {playerwelcomecooldown::%player's uuid%} to true
 
 on respawn:
-	if respawn reason = death respawn:
+    if respawn reason = death respawn:
         wait 6 seconds
         {norekit} is not player's uuid
         randomKit(player)
