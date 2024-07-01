@@ -68,7 +68,6 @@ on death of player:
         add 1 to {killStreak::%{_uuid}%}
         set {_playerWhoDetonated} to {_uuid} parsed as offline player
         give 5 sunflower named "<reset><yellow>&lCoin" to {_playerWhoDetonated}    
-        give 1 amethyst shard named "<reset><purple><bold>Weekly Token - Week 1" to {_playerWhoDetonated}
         send "&aEnemy Down" to {_playerWhoDetonated}
         checkKS({_playerWhoDetonated})
         if {playerBounty::%victim's uuid%} is set:
@@ -84,7 +83,6 @@ on death of player:
         add 1 to {killStreak::%{_uuid}%}
         set {anchorkiller} to {_uuid} parsed as offline player
         give 5 sunflower named "<reset><yellow>&lCoin" to {anchorkiller}    
-        give 1 amethyst shard named "<reset><purple><bold>Weekly Token - Week 1" to {anchorkiller}
         send "&aEnemy Down" to {anchorkiller}
         checkKS({anchorkiller})
         if {playerBounty::%victim's uuid%} is set:
@@ -95,7 +93,6 @@ on death of player:
     else:
         set {_uuid} to attacker's uuid
         give 5 sunflower named "<reset><yellow>&lCoin" to attacker    
-        give 1 amethyst shard named "<reset><purple><bold>Weekly Token - Week 1" to attacker
         #broadcast "UUID of playerWhoDetonated: %{_uuid}%"
         clear {killStreak::%victim's uuid%}		
         add 1 to {killStreak::%{_uuid}%}
@@ -449,7 +446,7 @@ on right click:
                 set {cooldown::%player's uuid%} to now
                 while {cooldown::%player's uuid%} is set:
                     wait 10 ticks
-                    if time since {cooldown::%player's uuid%} > 30 seconds:
+                    if time since {cooldown::%player's uuid%} > 10 seconds:
                         clear {cooldown::%player's uuid%}
 
     
@@ -480,6 +477,7 @@ on right click:
         apply infinite resistance of tier 4 to the last spawned entity
 
 on entity target:
+    entity is blaze
     if "%entity's target%" is "%{fireimmune}%":
         cancel event
 
