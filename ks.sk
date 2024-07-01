@@ -227,6 +227,24 @@ every 3 minutes:
     loop all players:
         send "&c<bold>Use <green><bold>/discord &c<bold>for huge giveaways and updates!" to loop-player
 
+every 60 minutes:
+    execute console command "minecraft:kill @e[type=ender_dragon]"
+    broadcast "&lCustom Ender Dragon can spawn now!"
+    set {_dragon} to random integer between 1 and 2
+    if {_dragon} is 1:
+        execute console command "jd spawn Thunderstorm"
+    if {_dragon} is 2:
+        execute console command "jd spawn Firestorm"
+
+every 5 seconds:
+    loop all players:
+        name of loop-player's off hand item contains "<cyan><bold>Light Feather"
+        apply swiftness 2 to loop-player
+        apply resistance 3 to loop-player
+        apply strength 1 to loop-player
+        apply haste 2 to loop-player
+        apply regeneration 2 to loop-player
+
 command /rekit:
     trigger:
         if {freerekit::%player's uuid%} is true:
@@ -272,6 +290,9 @@ on explode:
     if event-entity is fireball:
         cancel the event
         create an explosion of force 5 at event-location
+    if event-entity is large fireball:
+        cancel the event
+        create an explosion of force 10 at event-location
     if event-entity is explosive minecart:
         cancel the event
         create an explosion of force 10 at event-location
@@ -292,6 +313,12 @@ on teleport:
 
 
 on projectile hit:
+    if projectile is small fireball:
+        cancel the event
+        create a safe explosion of force 10 at event-location
+        loop blocks in radius 5 around event-location:
+            if regions at loop-block contains "pvp":
+                set loop-block to fire
     if name of shooter's tool contains "<red><bold><italic>Boom<white><bold><italic>Bow":
         delete projectile
         wait 1 tick
@@ -402,7 +429,29 @@ on entity shoot bow:
     else if name of shooter's tool contains "<white><bold>AWP":
         cancel event
         make the player shoot an arrow at speed 6
-    
+
+on damage:
+    if damage cause is lightning:
+        cancel event
+
+on lightning:
+    create an explosion of force 20 at event-entity
+    loop players in radius 10 around event-entity:
+        ignite the loop-player
+        damage loop-player by 30
+
+
+on right click:
+    if name of player's held item contains "<gold><bold>Excalibur":
+        if distance between the target block and the player is less than 30:
+            if {cooldown::%player's uuid%} is not set:
+                strike lightning at the target block
+                set {cooldown::%player's uuid%} to now
+                while {cooldown::%player's uuid%} is set:
+                    wait 10 ticks
+                    if time since {cooldown::%player's uuid%} > 30 seconds:
+                        clear {cooldown::%player's uuid%}
+
     
 command /eredeem:
     trigger:
@@ -418,4 +467,28 @@ command /eredeem:
 on drop:
     if name of event-item contains "Permanent":
         delete event-dropped item
-    
+
+on right click:
+    name of held item contains "<orange><bold>Summon Firestorm"
+    remove 1 blaze powder named "<orange><bold>Summon Firestorm" from player's inventory
+    set {fireimmune} to player
+    send "You will be spared by the firestorm until another player summons one" to player
+    loop 10 times:
+        spawn a blaze 2 blocks above the player
+        set the last spawned entity's max health to 60
+        heal the last spawned entity by 90
+        apply infinite resistance of tier 4 to the last spawned entity
+
+on entity target:
+    if "%entity's target%" is "%{fireimmune}%":
+        cancel event
+
+
+
+
+
+on right click with fire charge:
+    name of held item contains "<red><bold>Fireball"
+    cancel event
+    remove 1 fire charge named "<red><bold>Fireball" from player's inventory
+    shoot a fireball from player at speed 1
