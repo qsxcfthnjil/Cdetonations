@@ -268,6 +268,12 @@ on pick up:
     if event-item is dirt:
         if {pickupjunk::%player's uuid%} is not true:
             cancel event
+    if event-item is end stone:
+        if {pickupjunk::%player's uuid%} is not true:
+            cancel event
+    if event-item is sand:
+        if {pickupjunk::%player's uuid%} is not true:
+            cancel event
     if event-item is glowstone dust:
         if {pickupjunk::%player's uuid%} is not true:
             cancel event
