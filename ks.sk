@@ -218,7 +218,7 @@ command toggleores:
 
 command /discord:
     trigger:
-        send "&cJoin the discord! Huge Giveaways! &d&l&n<link:https://discord.gg/yffwheQ8>ClICK" to player
+        send "&cJoin the discord! Huge Giveaways! &d&l&n<link:https://discord.gg/DkaWPY4b>ClICK" to player
 
 every 3 minutes:
     loop all players:
@@ -235,13 +235,56 @@ every 60 minutes:
 
 every 5 seconds:
     loop all players:
-        name of loop-player's off hand item contains "<cyan><bold>Light Feather"
-        apply swiftness 2 to loop-player
-        apply resistance 3 to loop-player
-        apply strength 1 to loop-player
-        apply haste 2 to loop-player
-        apply regeneration 2 to loop-player
-
+        if name of loop-player's off hand item contains "<cyan><bold>Light Feather":
+            apply swiftness 2 to loop-player
+            apply resistance 3 to loop-player
+            apply strength 1 to loop-player
+            apply haste 2 to loop-player
+            apply regeneration 2 to loop-player
+        loop-player is in world "world_the_end"
+        regions at loop-player does not contain "mainendisland"
+        if {safehome::%loop-player's uuid%} is not set:
+            chance of 1%:
+                apply darkness to loop-player for 20 seconds
+                apply slowness of tier 3 to loop-player for 20 seconds
+                send "<red>Be careful, an eldritch entity has set its sights upon you!" to loop-player
+                loop 5 times:
+                    spawn a ghast 10 blocks above loop-player
+                    apply absorption of tier 999 to the last spawned entity for 20 seconds
+                    set gliding of loop-player to off
+                    wait 5 ticks
+            chance of 1%:
+                apply darkness to loop-player for 20 seconds
+                apply slowness of tier 3 to loop-player for 20 seconds
+                send "<red>Be careful, an Infestation is upon you!" to loop-player
+                loop 30 times:
+                    spawn a endermite at loop-player
+                    apply absorption of tier 999 to the last spawned entity for 20 seconds
+                    apply infinite strength of tier 9 to the last spawned entity
+                    set gliding of loop-player to off
+                    wait 5 ticks
+        else if the distance between (block at loop-player) and {safehome::%loop-player's uuid%} is more than 100:
+            chance of 1%:
+                apply darkness to loop-player for 20 seconds
+                apply slowness of tier 3 to loop-player for 20 seconds
+                send "<red>Be careful, an eldritch entity has set its sights upon you!" to loop-player
+                loop 5 times:
+                    spawn a ghast 10 blocks above loop-player
+                    apply absorption of tier 999 to the last spawned entity for 20 seconds
+                    set gliding of loop-player to off
+                    wait 5 ticks
+            chance of 1%:
+                apply darkness to loop-player for 20 seconds
+                apply slowness of tier 3 to loop-player for 20 seconds
+                send "<red>Be careful, an Infestation is upon you!" to loop-player
+                loop 30 times:
+                    spawn a endermite at loop-player
+                    apply absorption of tier 999 to the last spawned entity for 20 seconds
+                    apply infinite strength of tier 9 to the last spawned entity
+                    set gliding of loop-player to off
+                    wait 5 ticks
+        else:
+            ActionBar(loop-player, "You are safe here...")
 command /rekit:
     trigger:
         if {freerekit::%player's uuid%} is true:
@@ -314,8 +357,10 @@ on projectile hit:
         cancel the event
         create a safe explosion of force 10 at event-location
         loop blocks in radius 5 around event-location:
-            if regions at loop-block contains "pvp":
+            if regions at loop-block contains "pvp" or "mainendisland":
                 set loop-block to fire
+    if projectile is shulker bullet:
+        create explosion of force 4 at event-location
     if name of shooter's tool contains "<red><bold><italic>Boom<white><bold><italic>Bow":
         delete projectile
         wait 1 tick
@@ -455,11 +500,22 @@ command /eredeem:
         if name of player's held item contains "<purple><bold>Event Voucher - Week 1":
             set player's held item to air
             set {event1::%player's uuid%} to true
-            send "<purple><bold><underline>Event voucher redeemed!"
+            send "<purple><bold><underline>Event voucher redeemed! (Will obtain after death)"
+        else if name of player's held item contains "<purple><bold>Event Voucher - Week 2":
+            set player's held item to air
+            set {event2::%player's uuid%} to true
+            send "<purple><bold><underline>Event voucher redeemed! (Will obtain after death)"
+        else if name of player's held item contains "<purple><bold>Extra heart":
+            if {extraheart::%player's uuid%} is not set:
+                set {extraheart::%player's uuid%} to true
+                set player's held item to air
+                set player's max health to 11
+                send "<purple><bold><underline>Heart redeemed!"
+            else:
+                send "<red><bold>You have reached the maximum amount of hearts allowed by this item!"
 
         else:
-            send "<red>Hold the event voucher in your hand!" to player
-    	
+            send "<red>Hold the event item in your hand!" to player    	
     
 on drop:
     if name of event-item contains "Permanent":
@@ -490,3 +546,15 @@ on right click with fire charge:
     cancel event
     remove 1 fire charge named "<red><bold>Fireball" from player's inventory
     shoot a fireball from player at speed 1
+
+on command "sethome":
+    if event-commandsender is not in world "world_the_end":
+        send "&lYou can only set home in the end dimension!" to event-commandsender
+        cancel event
+        stop
+    set {safehome::%player's uuid%} to location of block at player
+    send "You are safe here..."
+on command:
+    if command is "/pl", "/plugins", "/?":
+        cancel event
+        send "Nope, sorry!" to player
