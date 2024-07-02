@@ -48,7 +48,9 @@ on respawn:
         {norekit} is not player's uuid
         randomKit(player)
         if {event1::%player's uuid%} is set:
-            give player (amethyst silence netherite boots of protection 3 and unbreaking 3 and mending and curse of vanishing) named "<dark gray><bold>Permanent Boots"
+            give player (amethyst silence netherite boots of protection 4 and unbreaking 3 and mending and curse of vanishing) named "<dark gray><bold>Permanent Boots"
+        if {event2::%player's uuid%} is set:
+            give player (amethyst silence netherite chestplate of protection 4 and unbreaking 3 and mending and curse of vanishing) named "<dark gray><bold>Permanent Chestplate"
 
 
 function randomKit(p: player):
