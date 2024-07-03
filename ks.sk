@@ -233,6 +233,13 @@ every 60 minutes:
     if {_dragon} is 2:
         execute console command "jd spawn Firestorm"
 
+
+
+
+
+
+
+
 every 5 seconds:
     loop all players:
         if name of loop-player's off hand item contains "<cyan><bold>Light Feather":
@@ -306,7 +313,7 @@ on damage:
     metadata value "custom" of event-projectile is "<white><bold>AWP"
     cancel event
     kill event-projectile
-    damage victim by 15 hearts
+    damage victim by 20 hearts
     apply blindness 4 to victim for 2 seconds
     apply slowness 3 to victim for 2 seconds
     apply glowing to victim for 5 seconds
@@ -516,7 +523,18 @@ command /eredeem:
 
         else:
             send "<red>Hold the event item in your hand!" to player    	
-    
+
+command /ewithdraw:
+    trigger:
+        if {event1::%player's uuid%} is true:
+            clear {eventt1::%player's uuid%}
+            set slot 1 of player's inventory to piece of paper named "<purple><bold>Event Voucher - Week 1"
+        if {event2::%player's uuid%} is true:
+            clear {eventt2::%player's uuid%}
+            set slot 0 of player's inventory to piece of paper named "<purple><bold>Event Voucher - Week 2"
+        if {extraheart::%player's uuid%} is true:
+            clear {extraheart::%player's uuid%}
+            set slot 2 of player's inventory to piece of paper named "<purple><bold>Extra heart"
 on drop:
     if name of event-item contains "Permanent":
         delete event-dropped item
@@ -548,6 +566,13 @@ on right click with fire charge:
     shoot a fireball from player at speed 1
 
 on command "sethome":
+    if event-commandsender is not in world "world_the_end":
+        send "&lYou can only set home in the end dimension!" to event-commandsender
+        cancel event
+        stop
+    set {safehome::%player's uuid%} to location of block at player
+    send "You are safe here..."
+on command "team sethome":
     if event-commandsender is not in world "world_the_end":
         send "&lYou can only set home in the end dimension!" to event-commandsender
         cancel event
