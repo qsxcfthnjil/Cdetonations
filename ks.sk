@@ -329,6 +329,9 @@ on damage:
             set maximum damage delay of victim to 0 seconds
             wait 3 tick
             set damage delay of victim to 0.5 seconds     
+    if attacker is hoglin:
+        apply resistance of tier 5 to attacker for 1 second
+        create explosion of force 9 at location of block at attacker
 
 on explode:
     if event-entity is wither:
@@ -366,12 +369,14 @@ on projectile hit:
         loop blocks in radius 5 around event-location:
             if regions at loop-block contains "pvp" or "mainendisland":
                 set loop-block to fire
+            else if loop-block is not in world "world":
+                set loop-block to fire
     if projectile is shulker bullet:
         create explosion of force 4 at event-location
     if name of shooter's tool contains "<red><bold><italic>Boom<white><bold><italic>Bow":
         delete projectile
         wait 1 tick
-        create explosion of force 2.5 at location
+        create explosion of force 3 at location
     if name of shooter's tool contains "<red><bold>RPG":
         delete projectile
         wait 1 tick
@@ -381,52 +386,96 @@ on entity shoot bow:
     if name of shooter's tool contains "<white><bold>Remington 870":
         delete projectile
         wait 1 tick
-        if player has 20 arrows:
-            remove 20 arrows from player's inventory
-            make the player shoot an arrow at speed 2
-            make the player shoot an arrow at speed 2
+        if event-entity is a player:
+            if player has 20 arrows:
+                remove 20 arrows from player's inventory
+                make the player shoot an arrow at speed 2
+                make the player shoot an arrow at speed 2
+                push last shot projectile right at speed 0.05
+                make the player shoot an arrow at speed 2
+                push last shot projectile left at speed 0.05
+                make the player shoot an arrow at speed 2
+                push last shot projectile upwards at speed 0.05
+                make the player shoot an arrow at speed 2
+                push last shot projectile downwards at speed 0.05
+                make the player shoot an arrow at speed 2
+                push last shot projectile downwards at speed 0.05
+                push last shot projectile left at speed 0.05
+                make the player shoot an arrow at speed 2
+                push last shot projectile downwards at speed 0.05
+                push last shot projectile right at speed 0.05
+                make the player shoot an arrow at speed 2
+                push last shot projectile upwards at speed 0.05
+                push last shot projectile left at speed 0.05
+                make the player shoot an arrow at speed 2
+                push last shot projectile upwards at speed 0.05
+                push last shot projectile right at speed 0.05
+        
+                make the player shoot an arrow at speed 2
+                push last shot projectile right at speed 0.1
+                make the player shoot an arrow at speed 2
+                push last shot projectile left at speed 0.1
+                make the player shoot an arrow at speed 2
+                push last shot projectile upwards at speed 0.1
+                make the player shoot an arrow at speed 2
+                push last shot projectile downwards at speed 0.1
+                make the player shoot an arrow at speed 2
+                push last shot projectile downwards at speed 0.1
+                push last shot projectile left at speed 0.1
+                make the player shoot an arrow at speed 2
+                push last shot projectile downwards at speed 0.1
+                push last shot projectile right at speed 0.1
+                make the player shoot an arrow at speed 2
+                push last shot projectile upwards at speed 0.1
+                push last shot projectile left at speed 0.1
+                make the player shoot an arrow at speed 2
+                push last shot projectile upwards at speed 0.1
+                push last shot projectile right at speed 0.1
+            else:
+                send "You need at least 20 regular arrows" to player
+        else:
+            make the event-entity shoot an arrow at speed 2.5
+            make the event-entity shoot an arrow at speed 2.5
             push last shot projectile right at speed 0.05
-            make the player shoot an arrow at speed 2
+            make the event-entity shoot an arrow at speed 2.5
             push last shot projectile left at speed 0.05
-            make the player shoot an arrow at speed 2
+            make the event-entity shoot an arrow at speed 2.5
             push last shot projectile upwards at speed 0.05
-            make the player shoot an arrow at speed 2
+            make the event-entity shoot an arrow at speed 2.5
             push last shot projectile downwards at speed 0.05
-            make the player shoot an arrow at speed 2
+            make the event-entity shoot an arrow at speed 2.5
             push last shot projectile downwards at speed 0.05
             push last shot projectile left at speed 0.05
-            make the player shoot an arrow at speed 2
+            make the event-entity shoot an arrow at speed 2.5
             push last shot projectile downwards at speed 0.05
             push last shot projectile right at speed 0.05
-            make the player shoot an arrow at speed 2
+            make the event-entity shoot an arrow at speed 2.5
             push last shot projectile upwards at speed 0.05
             push last shot projectile left at speed 0.05
-            make the player shoot an arrow at speed 2
+            make the event-entity shoot an arrow at speed 2.5
             push last shot projectile upwards at speed 0.05
             push last shot projectile right at speed 0.05
     
-            make the player shoot an arrow at speed 2
+            make the event-entity shoot an arrow at speed 2.5
             push last shot projectile right at speed 0.1
-            make the player shoot an arrow at speed 2
+            make the event-entity shoot an arrow at speed 2.5
             push last shot projectile left at speed 0.1
-            make the player shoot an arrow at speed 2
+            make the event-entity shoot an arrow at speed 2.5
             push last shot projectile upwards at speed 0.1
-            make the player shoot an arrow at speed 2
+            make the event-entity shoot an arrow at speed 2.5
             push last shot projectile downwards at speed 0.1
-            make the player shoot an arrow at speed 2
+            make the event-entity shoot an arrow at speed 2.5
             push last shot projectile downwards at speed 0.1
             push last shot projectile left at speed 0.1
-            make the player shoot an arrow at speed 2
+            make the event-entity shoot an arrow at speed 2.5
             push last shot projectile downwards at speed 0.1
             push last shot projectile right at speed 0.1
-            make the player shoot an arrow at speed 2
+            make the event-entity shoot an arrow at speed 2.5
             push last shot projectile upwards at speed 0.1
             push last shot projectile left at speed 0.1
-            make the player shoot an arrow at speed 2
+            make the event-entity shoot an arrow at speed 2.5
             push last shot projectile upwards at speed 0.1
             push last shot projectile right at speed 0.1
-        else:
-            send "You need at least 20 regular arrows" to player
     else if name of shooter's tool contains "<white><bold>AA-12":
         cancel event
         if player has 20 arrows:
@@ -500,6 +549,7 @@ on right click:
                     wait 10 ticks
                     if time since {cooldown::%player's uuid%} > 10 seconds:
                         clear {cooldown::%player's uuid%}
+                        send "<green><bold>Cooldown over! You may now smite again." to player
 
     
 command /eredeem:
@@ -549,15 +599,45 @@ on right click:
         set the last spawned entity's max health to 60
         heal the last spawned entity by 90
         apply infinite resistance of tier 4 to the last spawned entity
+        apply infinite regeneration of tier 1 to the last spawned entity
 
 on entity target:
-    entity is blaze
-    if "%entity's target%" is "%{fireimmune}%":
-        cancel event
+    apply infinite resistance of tier 2 to entity
+    if entity is blaze:
+        if "%entity's target%" is "%{fireimmune}%":
+            cancel event
+    if entity is zombified piglin:
+        chance of 10%:
+            loop 2 times:
+                spawn a zombified piglin at location of entity's target
+                apply infinite strength of tier 4 to the last spawned entity
+                apply infinite speed to the last spawned entity
+                apply infinite resistance of tier 2 to the last spawned entity
+                apply infinite wither to the last spawned entity
+        chance of 15%:
+            spawn a zombified piglin at location of entity's target
+            apply infinite strength of tier 4 to the last spawned entity
+            apply infinite speed to the last spawned entity
+            apply infinite resistance of tier 2 to the last spawned entity
+            apply infinite wither to the last spawned entity
+        apply slowness of tier 3 to entity's target for 10 seconds
+        apply darkness to entity's target for 10 seconds
 
 
+on spawn of a piglin:
+    set event-entity's held item to crossbow named "<white><bold>Remington 870"
+
+on spawn of a skeleton:
+    set event-entity's held item to bow named "<red><bold><italic>Boom<white><bold><italic>Bow"
 
 
+on spawn of a wither skeleton:
+    set event-entity's held item to bow named "<red><bold><italic>Boom<white><bold><italic>Bow"
+
+on spawn of a piglin brute:
+    set event-entity's held item to netherite axe of sharpness 5 and unbreaking 3
+    apply infinite strength of tier 4 to event-entity
+    apply infinite speed of tier 2 to event-entity
 
 on right click with fire charge:
     name of held item contains "<red><bold>Fireball"
