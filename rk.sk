@@ -16,6 +16,7 @@ on damage:
         victim is not dropped green concrete powder
         victim is not dropped dirt
         victim is not dropped glowstone dust
+        victim is not dropped sand
         if damage cause is not lava:
             cancel event
 
