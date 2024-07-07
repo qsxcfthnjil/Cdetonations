@@ -136,6 +136,9 @@ on respawn:
             give player (amethyst silence netherite boots of protection 4 and unbreaking 3 and mending and curse of vanishing) named "<dark gray><bold>Permanent Boots"
         if {event2::%player's uuid%} is set:
             give player (amethyst silence netherite chestplate of protection 4 and unbreaking 3 and mending and curse of vanishing) named "<dark gray><bold>Permanent Chestplate"
+        if {event3::%player's uuid%} is set:
+            give player (netherite sword of knockback 1 and sweeping edge 3 named "<dark gray><bold>[Permanent] <red><bold>Vampiric Blade")
+            set {sharpness::%player's uuid%} to 0
 
 
 function randomKit(p: player):
