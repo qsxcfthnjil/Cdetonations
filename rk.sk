@@ -7,6 +7,88 @@ command /norekit <player>:
         clear {norekit}
     
 
+command /vip1:
+    permission: skript.vip
+    permission message: Hey! You need to pay to use this command ;)
+    cooldown: 15 minutes
+    cooldown message: The cooldown for this command is 15 minutes, sorry! :D
+    trigger:
+        clear player's inventory
+        set player's helmet to emerald silence diamond helmet of protection 4 and unbreaking 3 and mending named "<green><bold>VIP HELMET"
+        set player's boots to emerald silence diamond boots of protection 4 and unbreaking 3 and mending named "<green><bold>VIP BOOTS"
+        set player's leggings to emerald silence diamond leggings of blast protection 4 and unbreaking 3 and mending named "<green><bold>VIP LEGGINGS"
+        set player's chestplate to emerald silence diamond chestplate of protection 4 and unbreaking 3 and mending named "<green><bold>VIP CHESTPLATE"
+        set slot 0 of player's inventory to diamond sword of sharpness 5 and knockback 1 and unbreaking 3 and mending named "<green><bold>VIP SWORD"
+        set slot 1 of player's inventory to 16 of ender pearl
+        set slot 2 of player's inventory to 64 of end crystal
+        set slot 3 of player's inventory to 64 of obsidian
+        set slot 4 of player's inventory to 64 of glowstone
+        set slot 5 of player's inventory to 64 of respawn anchor
+        set slot 6 of player's inventory to bow of power 5 and punch 2 and unbreaking 3 and mending
+        set slot 7 of player's inventory to totem of undying
+        set slot 8 of player's inventory to 64 of golden apple
+        set slot 9 of player's inventory to 16 of ender pearl
+        set slot 18 of player's inventory to 16 of ender pearl
+        set slot 27 of player's inventory to 16 of ender pearl
+        set slot 28 of player's inventory to 64 of experience bottle
+        set slot 10 of player's inventory to totem of undying
+        set slot 19 of player's inventory to totem of undying
+        set slot 14 of player's inventory to totem of undying
+        set slot 11 of player's inventory to totem of undying
+        set slot 12 of player's inventory to totem of undying
+        set slot 13 of player's inventory to totem of undying
+        set slot 20 of player's inventory to totem of undying
+        set slot 21 of player's inventory to totem of undying
+        set slot 22 of player's inventory to totem of undying
+        set slot 23 of player's inventory to totem of undying
+        set slot 29 of player's inventory to totem of undying
+        set slot 30 of player's inventory to totem of undying
+        set slot 31 of player's inventory to totem of undying
+        set slot 32 of player's inventory to totem of undying
+        set slot 15 of player's inventory to 64 of tipped arrow of long slow falling
+        set slot 24 of player's inventory to shield of unbreaking 3 and mending
+        set the off hand item of player to totem of undying
+command /vip2:
+    permission: skript.vip
+    permission message: Hey! You need to pay to use this command ;)
+    cooldown: 8 hours
+    cooldown message: The cooldown for this command is 8 hours, sorry! :D
+    trigger:
+        clear player's inventory
+        set player's helmet to emerald silence netherite helmet of protection 4 and unbreaking 3 and mending named "<green><bold>VIP HELMET"
+        set player's boots to emerald silence netherite boots of protection 4 and unbreaking 3 and mending named "<green><bold>VIP BOOTS"
+        set player's leggings to emerald silence netherite leggings of blast protection 4 and unbreaking 3 and mending named "<green><bold>VIP LEGGINGS"
+        set player's chestplate to emerald silence netherite chestplate of protection 4 and unbreaking 3 and mending named "<green><bold>VIP CHESTPLATE"
+        set slot 0 of player's inventory to diamond sword of sharpness 5 and knockback 1 and unbreaking 3 and mending named "<green><bold>VIP SWORD"
+        set slot 1 of player's inventory to 16 of ender pearl
+        set slot 2 of player's inventory to 64 of end crystal
+        set slot 3 of player's inventory to 64 of obsidian
+        set slot 4 of player's inventory to 64 of glowstone
+        set slot 5 of player's inventory to 64 of respawn anchor
+        set slot 6 of player's inventory to bow of power 5 and punch 2 and unbreaking 3 and mending
+        set slot 7 of player's inventory to totem of undying
+        set slot 8 of player's inventory to 64 of golden apple
+        set slot 9 of player's inventory to 16 of ender pearl
+        set slot 18 of player's inventory to 16 of ender pearl
+        set slot 27 of player's inventory to 16 of ender pearl
+        set slot 28 of player's inventory to 64 of experience bottle
+        set slot 10 of player's inventory to totem of undying
+        set slot 19 of player's inventory to totem of undying
+        set slot 14 of player's inventory to totem of undying
+        set slot 11 of player's inventory to totem of undying
+        set slot 12 of player's inventory to totem of undying
+        set slot 13 of player's inventory to totem of undying
+        set slot 20 of player's inventory to totem of undying
+        set slot 21 of player's inventory to totem of undying
+        set slot 22 of player's inventory to totem of undying
+        set slot 23 of player's inventory to totem of undying
+        set slot 29 of player's inventory to totem of undying
+        set slot 30 of player's inventory to totem of undying
+        set slot 31 of player's inventory to totem of undying
+        set slot 32 of player's inventory to totem of undying
+        set slot 15 of player's inventory to 64 of tipped arrow of long slow falling
+        set slot 24 of player's inventory to shield of unbreaking 3 and mending
+        set the off hand item of player to totem of undying
 on damage:
     if victim is a dropped item:
         victim is not dropped moss block
@@ -21,7 +103,9 @@ on damage:
             cancel event
 
 
-
+command /store:
+    trigger:
+        send "<green>Buy ranks and in-game currency here! &d&l&n<link:https://cdetonations.tebex.io/><Click here!>" to player
 
 
 
