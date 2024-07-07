@@ -44,7 +44,8 @@ function checkKS(p: player):
 
 
 on death of player:
-
+    set {deathlightning} to true
+    strike lightning effect at the victim
     #broadcast "event-damagecause is <bold>%event-damagecause%"
 
     set {_drops::*} to drops  
@@ -75,6 +76,12 @@ on death of player:
             broadcast "%{_playerWhoDetonated}% claimed the bounty: %{playerBounty::%victim's uuid%}%"
             wait 1 tick
             clear {playerBounty::%victim's uuid%}
+        {event3::%{_uuid}%} is set
+        loop all items in the inventory of {_playerWhoDetonated}:
+            if name of loop-item contains "<dark gray><bold>[Permanent] <red><bold>Vampiric Blade":
+                add 1 to {sharpness::%{_uuid}%}
+                enchant loop-item with "sharpness %{sharpness::%{_uuid}%}%" parsed as enchantment type
+                stop
     else if event-damagecause is block explosion:
         set {_uuid} to {anchorkiller}
         #broadcast "<bold>Anchor kill detected - %{_uuid}%"
@@ -90,6 +97,12 @@ on death of player:
             broadcast "%{anchorkiller}% claimed the bounty: %{playerBounty::%victim's uuid%}%"
             wait 1 tick
             clear {playerBounty::%victim's uuid%}
+        {event3::%{_uuid}%} is set
+        loop all items in the inventory of {anchorkiller}:
+            if name of loop-item contains "<dark gray><bold>[Permanent] <red><bold>Vampiric Blade":
+                add 1 to {sharpness::%{_uuid}%}
+                enchant loop-item with "sharpness %{sharpness::%{_uuid}%}%" parsed as enchantment type
+                stop
     else:
         set {_uuid} to attacker's uuid
         give 5 sunflower named "<reset><yellow>&lCoin" to attacker    
@@ -103,7 +116,12 @@ on death of player:
             broadcast "%attacker% claimed the bounty: %{playerBounty::%victim's uuid%}%"
             wait 1 tick
             clear {playerBounty::%victim's uuid%}
-
+        {event3::%{_uuid}%} is set
+        loop all items in the inventory of attacker:
+            if name of loop-item contains "<dark gray><bold>[Permanent] <red><bold>Vampiric Blade":
+                add 1 to {sharpness::%{_uuid}%}
+                enchant loop-item with "sharpness %{sharpness::%{_uuid}%}%" parsed as enchantment type
+                stop
 
 
 on damage of ender crystal:
@@ -533,11 +551,13 @@ on damage:
         cancel event
 
 on lightning:
-    create an explosion of force 20 at event-entity
-    loop players in radius 10 around event-entity:
-        ignite the loop-player
-        damage loop-player by 30
-
+    if {deathlightning} is not true:
+        create an explosion of force 20 at event-entity
+        loop players in radius 10 around event-entity:
+            ignite the loop-player
+            damage loop-player by 30
+    else:
+        set {deathlightning} to false
 
 on right click:
     if name of player's held item contains "<gold><bold>Excalibur":
@@ -561,6 +581,10 @@ command /eredeem:
         else if name of player's held item contains "<purple><bold>Event Voucher - Week 2":
             set player's held item to air
             set {event2::%player's uuid%} to true
+            send "<purple><bold><underline>Event voucher redeemed! (Will obtain after death)"
+        else if name of player's held item contains "<purple><bold>Event Voucher - Week 3":
+            set player's held item to air
+            set {event3::%player's uuid%} to true
             send "<purple><bold><underline>Event voucher redeemed! (Will obtain after death)"
         else if name of player's held item contains "<purple><bold>Extra heart":
             if {extraheart::%player's uuid%} is not set:
@@ -667,6 +691,6 @@ on command "team sethome":
     set {safehome::%player's uuid%} to location of block at player
     send "You are safe here..."
 on command:
-    if command is "/pl", "/plugins", "/?":
+    if command is "/pl", "/plugins" or "/?":
         cancel event
         send "Nope, sorry!" to player
