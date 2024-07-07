@@ -547,7 +547,7 @@ on right click:
                 set {cooldown::%player's uuid%} to now
                 while {cooldown::%player's uuid%} is set:
                     wait 10 ticks
-                    if time since {cooldown::%player's uuid%} > 10 seconds:
+                    if time since {cooldown::%player's uuid%} > 60 seconds:
                         clear {cooldown::%player's uuid%}
                         send "<green><bold>Cooldown over! You may now smite again." to player
 
@@ -644,6 +644,13 @@ on right click with fire charge:
     cancel event
     remove 1 fire charge named "<red><bold>Fireball" from player's inventory
     shoot a fireball from player at speed 1
+
+
+on death of a zombified piglin:
+    cancel drops
+    drop 3 gold nuggets at victim
+    drop 1 rotten flesh at victim
+
 
 on command "sethome":
     if event-commandsender is not in world "world_the_end":
