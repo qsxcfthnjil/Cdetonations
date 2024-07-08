@@ -363,12 +363,13 @@ on explode:
         create an explosion of force 10 at event-location
     if event-entity is explosive minecart:
         cancel the event
-        create an explosion of force 10 at event-location
+        create an explosion of force 11 at event-location
     if event-entity is tnt:
         cancel the event
-        create an explosion of force 11 at event-location
+        create an explosion of force 12 at event-location
     if event-entity is creeper:
         cancel the event
+        execute console command "minecraft:effect give @e[type=creeper] resistance 1 5"
         create an explosion of force 15 at event-location
 
 
@@ -600,15 +601,19 @@ command /eredeem:
 
 command /ewithdraw:
     trigger:
-        if {event1::%player's uuid%} is true:
-            clear {eventt1::%player's uuid%}
+        if {event1::%player's uuid%} is set:
+            clear {event1::%player's uuid%}
             set slot 1 of player's inventory to piece of paper named "<purple><bold>Event Voucher - Week 1"
-        if {event2::%player's uuid%} is true:
-            clear {eventt2::%player's uuid%}
+        if {event2::%player's uuid%} is set:
+            clear {event2::%player's uuid%}
             set slot 0 of player's inventory to piece of paper named "<purple><bold>Event Voucher - Week 2"
-        if {extraheart::%player's uuid%} is true:
+        if {event3::%player's uuid%} is set:
+            clear {event3::%player's uuid%}
+            set slot 3 of player's inventory to piece of paper named "<purple><bold>Event Voucher - Week 3"
+        if {extraheart::%player's uuid%} is set:
             clear {extraheart::%player's uuid%}
-            set slot 2 of player's inventory to piece of paper named "<purple><bold>Extra heart"
+            set slot 2 of player's inventory to nether star named "<purple><bold>Extra heart"
+            set player's max health to 10
 on drop:
     if name of event-item contains "Permanent":
         delete event-dropped item
@@ -631,14 +636,14 @@ on entity target:
         if "%entity's target%" is "%{fireimmune}%":
             cancel event
     if entity is zombified piglin:
-        chance of 10%:
+        chance of 11%:
             loop 2 times:
                 spawn a zombified piglin at location of entity's target
                 apply infinite strength of tier 4 to the last spawned entity
                 apply infinite speed to the last spawned entity
                 apply infinite resistance of tier 2 to the last spawned entity
                 apply infinite wither to the last spawned entity
-        chance of 15%:
+        chance of 16%:
             spawn a zombified piglin at location of entity's target
             apply infinite strength of tier 4 to the last spawned entity
             apply infinite speed to the last spawned entity
@@ -677,15 +682,15 @@ on death of a zombified piglin:
 
 
 on command "sethome":
-    if event-commandsender is not in world "world_the_end":
-        send "&lYou can only set home in the end dimension!" to event-commandsender
+    if event-commandsender is in world "world":
+        send "&lYou can only set home in the end and nether dimensions!" to event-commandsender
         cancel event
         stop
     set {safehome::%player's uuid%} to location of block at player
     send "You are safe here..."
 on command "team sethome":
-    if event-commandsender is not in world "world_the_end":
-        send "&lYou can only set home in the end dimension!" to event-commandsender
+    if event-commandsender is in world "world":
+        send "&lYou can only set home in the end and nether dimensions!" to event-commandsender
         cancel event
         stop
     set {safehome::%player's uuid%} to location of block at player
