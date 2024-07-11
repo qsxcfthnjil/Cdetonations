@@ -103,6 +103,29 @@ on damage:
             cancel event
 
 
+
+
+command store1 <player>:
+    permission: op
+    trigger:
+        give a paper named "<purple><bold>Event voucher - Week 1" to arg-1
+        execute console command "broadcast %arg-1% has bought an Event voucher from the online store! Thank them for supporting the server :D"
+command store2 <player>:
+    permission: op
+    trigger:
+        give a paper named "<purple><bold>Event voucher - Week 2" to arg-1
+        execute console command "broadcast %arg-1% has bought an Event voucher from the online store! Thank them for supporting the server :D"
+command store3 <player>:
+    permission: op
+    trigger:
+        give a paper named "<purple><bold>Event voucher - Week 3" to arg-1
+        execute console command "broadcast %arg-1% has bought an Event voucher from the online store! Thank them for supporting the server :D"
+command storeheart <player>:
+    permission: op
+    trigger:
+        give a nether star named "<purple><bold>Extra Heart" to arg-1
+        execute console command "broadcast %arg-1% has bought an Event voucher from the online store! Thank them for supporting the server :D"
+
 command /store:
     trigger:
         send "<green>Buy ranks and in-game currency here! &d&l&n<link:https://cdetonations.tebex.io/><Click here!>" to player
