@@ -103,6 +103,10 @@ on damage:
             cancel event
 
 
+command checkevent <player>:
+    trigger:
+        send "Event 1: %{event1::%arg-1's uuid%}%, Event 2: %{event2::%arg-1's uuid%}%, Event 3: %{event3::%arg-1's uuid%}%, Event 4: %{event4::%arg-1's uuid%}%, Extra heart: %{extraheart::%arg-1's uuid%}%" to player
+
 
 
 command store1 <player>:
