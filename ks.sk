@@ -239,7 +239,7 @@ command toggleores:
 
 command /discord:
     trigger:
-        send "&cJoin the discord! Huge Giveaways! &d&l&n<link:https://discord.gg/DkaWPY4b>ClICK" to player
+        send "&cJoin the discord! Huge Giveaways! &d&l&n<link:https://discord.gg/rw68waNy5M>ClICK" to player
 
 every 3 minutes:
     loop all players:
@@ -367,6 +367,7 @@ on explode:
         cancel the event
         create an explosion of force 10 at event-location
     if event-entity is explosive minecart:
+        regions at event-entity does not contain "cpvparena"
         cancel the event
         create an explosion of force 12 at event-location
     if event-entity is tnt:
@@ -394,6 +395,7 @@ on projectile hit:
             if regions at loop-block contains "pvp" or "mainendisland":
                 set loop-block to fire
             else if loop-block is not in world "world":
+                regions at loop-block does not contain "netherspawn"
                 set loop-block to fire
     if projectile is shulker bullet:
         create explosion of force 4 at event-location
