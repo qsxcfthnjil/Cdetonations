@@ -388,6 +388,13 @@ on teleport:
 
 
 on projectile hit:
+    if projectile is snowball:
+        create a safe explosion of force 2 at event-location
+        loop blocks in radius 2 around event-location:
+            if regions at loop-block contains "spleef":
+                set loop-block to air
+    if projectile is dragon fireball:
+        create an explosion of force 8 at event-location
     if projectile is small fireball:
         cancel the event
         create a safe explosion of force 10 at event-location
@@ -552,7 +559,7 @@ on entity shoot bow:
             send "You need at least 20 regular arrows" to player
     else if name of shooter's tool contains "<white><bold>AWP":
         cancel event
-        make the player shoot an arrow at speed 6
+        make the player shoot an arrow at speed 8
 
 on damage:
     if damage cause is lightning:
@@ -691,6 +698,86 @@ on death of a zombified piglin:
         cancel drops
 
 
+
+on command "warp":
+    if {countdown::%player's uuid%} is not set:
+        cancel event
+        send "<red><bold>DO NOT MOVE! When the countdown is over use /warp again."
+        set {_loc} to location of block at player
+        play sound "entity.enderman.teleport" to player
+        loop 5 times:
+            ActionBar(player, "&aTeleporting in &d%6-loop-value% Seconds..")
+            if {_loc} is not location of block at player:
+                play sound "item.shield.break" to player
+                ActionBar(player, "&cTeleportation cancelled, You moved!")
+                stop
+            wait 1 second
+        set {countdown::%player's uuid%} to true
+        play sound "entity.player.levelup" to player
+        ActionBar(player, "&aYou may now use that command again.")
+        wait 5 seconds
+        clear {countdown::%player's uuid%}
+on command "team warp":
+    if {countdown::%player's uuid%} is not set:
+        cancel event
+        send "<red><bold>DO NOT MOVE! When the countdown is over use /team warp again."
+        set {_loc} to location of block at player
+        play sound "entity.enderman.teleport" to player
+        loop 5 times:
+            ActionBar(player, "&aTeleporting in &d%6-loop-value% Seconds..")
+            if {_loc} is not location of block at player:
+                play sound "item.shield.break" to player
+                ActionBar(player, "&cTeleportation cancelled, You moved!")
+                stop
+            wait 1 second
+        set {countdown::%player's uuid%} to true
+        play sound "entity.player.levelup" to player
+        ActionBar(player, "&aYou may now use that command again.")
+        wait 5 seconds
+        clear {countdown::%player's uuid%}
+on command "team home":
+    if {countdown::%player's uuid%} is not set:
+        cancel event
+        send "<red><bold>DO NOT MOVE! When the countdown is over use /team home again."
+        set {_loc} to location of block at player
+        play sound "entity.enderman.teleport" to player
+        loop 5 times:
+            ActionBar(player, "&aTeleporting in &d%6-loop-value% Seconds..")
+            if {_loc} is not location of block at player:
+                play sound "item.shield.break" to player
+                ActionBar(player, "&cTeleportation cancelled, You moved!")
+                stop
+            wait 1 second
+        set {countdown::%player's uuid%} to true
+        play sound "entity.player.levelup" to player
+        ActionBar(player, "&aYou may now use that command again.")
+        wait 5 seconds
+        clear {countdown::%player's uuid%}
+
+on command "home":
+    if {countdown::%player's uuid%} is not set:
+        cancel event
+        send "<red><bold>DO NOT MOVE! When the countdown is over use /home again."
+        set {_loc} to location of block at player
+        play sound "entity.enderman.teleport" to player
+        loop 5 times:
+            ActionBar(player, "&aTeleporting in &d%6-loop-value% Seconds..")
+            if {_loc} is not location of block at player:
+                play sound "item.shield.break" to player
+                ActionBar(player, "&cTeleportation cancelled, You moved!")
+                stop
+            wait 1 second
+        set {countdown::%player's uuid%} to true
+        play sound "entity.player.levelup" to player
+        ActionBar(player, "&aYou may now use that command again.")
+        wait 5 seconds
+        clear {countdown::%player's uuid%}
+
+
+
+
+
+
 on command "sethome":
     if event-commandsender is in world "world":
         send "&lYou can only set home in the end and nether dimensions!" to event-commandsender
@@ -706,6 +793,6 @@ on command "team sethome":
     set {safehome::%player's uuid%} to location of block at player
     send "You are safe here..."
 on command:
-    if command is "/pl", "/plugins" or "/?":
+    if command is "pl", "plugins" or "?":
         cancel event
         send "Nope, sorry!" to player
