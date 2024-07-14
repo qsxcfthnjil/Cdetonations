@@ -273,63 +273,36 @@ function randomKit(p: player):
 		
     set {_Weapon} to random integer between 1 and 3
     if {_Weapon} is 1:
-        set slot 2 of {_p}'s inventory to 16 of end crystal
+        set slot 2 of {_p}'s inventory to 8 of end crystal
         set slot 3 of {_p}'s inventory to 20 of obsidian
         set slot 4 of {_p}'s inventory to 10 of glowstone
         set slot 5 of {_p}'s inventory to 5 of respawn anchor
     else if {_Weapon} is 2:
-        set slot 2 of {_p}'s inventory to 32 of End Crystal
+        set slot 2 of {_p}'s inventory to 16 of End Crystal
         set slot 3 of {_p}'s inventory to 40 of Obsidian
     else if {_Weapon} is 3:
         set slot 4 of {_p}'s inventory to 20 of glowstone
-        set slot 5 of {_p}'s inventory to 15 of respawn anchor
+        set slot 5 of {_p}'s inventory to 10 of respawn anchor
         set slot 3 of {_p}'s inventory to 64 of cobblestone of curse of vanishing
 		
     set the off hand item of {_p} to totem of undying of curse of vanishing
-    set {_totems} to random integer between 3 and 8
+    set {_totems} to random integer between 1 and 8
     if {_totems} is 3:
         set slot 9 of {_p}'s inventory to totem of undying of curse of vanishing
         set slot 10 of {_p}'s inventory to totem of undying of curse of vanishing
-        set slot 11 of {_p}'s inventory to totem of undying
+        set slot 11 of {_p}'s inventory to totem of undying of curse of vanishing
         set slot 26 of {_p}'s inventory to wooden axe of curse of vanishing
     if {_totems} is 4:
         set slot 9 of {_p}'s inventory to totem of undying of curse of vanishing
         set slot 10 of {_p}'s inventory to totem of undying of curse of vanishing
         set slot 11 of {_p}'s inventory to totem of undying of curse of vanishing
-        set slot 12 of {_p}'s inventory to totem of undying
+        set slot 12 of {_p}'s inventory to totem of undying of curse of vanishing
         set slot 26 of {_p}'s inventory to stone axe of curse of vanishing
     if {_totems} is 5:
         set slot 9 of {_p}'s inventory to totem of undying of curse of vanishing
-        set slot 10 of {_p}'s inventory to totem of undying of curse of vanishing
-        set slot 11 of {_p}'s inventory to totem of undying of curse of vanishing
-        set slot 12 of {_p}'s inventory to totem of undying of curse of vanishing
-        set slot 13 of {_p}'s inventory to totem of undying
-        set slot 26 of {_p}'s inventory to iron axe of curse of vanishing
     if {_totems} is 6:
         set slot 9 of {_p}'s inventory to totem of undying of curse of vanishing
         set slot 10 of {_p}'s inventory to totem of undying of curse of vanishing
-        set slot 11 of {_p}'s inventory to totem of undying of curse of vanishing
-        set slot 12 of {_p}'s inventory to totem of undying of curse of vanishing
-        set slot 13 of {_p}'s inventory to totem of undying of curse of vanishing
-        set slot 14 of {_p}'s inventory to totem of undying
-        set slot 26 of {_p}'s inventory to diamond axe
-    if {_totems} is 7:
-        set slot 9 of {_p}'s inventory to totem of undying of curse of vanishing
-        set slot 10 of {_p}'s inventory to totem of undying of curse of vanishing
-        set slot 11 of {_p}'s inventory to totem of undying of curse of vanishing
-        set slot 12 of {_p}'s inventory to totem of undying of curse of vanishing
-        set slot 13 of {_p}'s inventory to totem of undying of curse of vanishing
-        set slot 14 of {_p}'s inventory to totem of undying of curse of vanishing
-        set slot 15 of {_p}'s inventory to totem of undying of curse of vanishing
-    if {_totems} is 8:
-        set slot 9 of {_p}'s inventory to totem of undying of curse of vanishing
-        set slot 10 of {_p}'s inventory to totem of undying of curse of vanishing
-        set slot 11 of {_p}'s inventory to totem of undying of curse of vanishing
-        set slot 12 of {_p}'s inventory to totem of undying of curse of vanishing
-        set slot 13 of {_p}'s inventory to totem of undying of curse of vanishing
-        set slot 14 of {_p}'s inventory to totem of undying of curse of vanishing
-        set slot 15 of {_p}'s inventory to totem of undying of curse of vanishing
-        set slot 16 of {_p}'s inventory to totem of undying
     set slot 7 of {_p}'s inventory to totem of undying of curse of vanishing
 
 
