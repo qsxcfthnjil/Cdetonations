@@ -50,6 +50,7 @@ on death of player:
 
     set {_drops::*} to drops  
     clear drops
+    drop 1 totem of undying at victim
     loop {_drops::*}:
         drop loop-value at victim
         set velocity of last dropped item to vector(random number between 0 and 0.1, 0.1, random number between 0 and 0.1)
@@ -307,11 +308,11 @@ every 5 seconds:
                 apply darkness to loop-player for 20 seconds
                 apply slowness of tier 3 to loop-player for 20 seconds
                 send "<red>Be careful, an Infestation is upon you!" to loop-player
+                set gliding of loop-player to off
                 loop 30 times:
                     spawn a endermite at loop-player
                     apply absorption of tier 999 to the last spawned entity for 20 seconds
                     apply infinite strength of tier 9 to the last spawned entity
-                    set gliding of loop-player to off
                     wait 5 ticks
         else:
             ActionBar(loop-player, "You are safe here...")
@@ -585,6 +586,23 @@ on right click:
                     if time since {cooldown::%player's uuid%} > 60 seconds:
                         clear {cooldown::%player's uuid%}
                         send "<green><bold>Cooldown over! You may now smite again." to player
+    if name of player's held item contains "<dark grey><bold>[Permanent] <purple><bold>Necromantic Staff":
+        if {cooldown2::%player's uuid%} is not set:
+            loop 3 times:
+                spawn a zombie at location of block at player
+                set name of last spawned entity to "<green><bold>Zombie - %player%"
+                equip last spawned entity with diamond helmet of protection 3
+                equip last spawned entity with diamond chestplate of protection 3
+                equip last spawned entity with diamond leggings of protection 3
+                equip last spawned entity with diamond boots of protection 3
+                set the held item of last spawned entity to diamond sword of sharpness 5
+                apply infinite speed of tier 2 to the last spawned entity
+            set {cooldown2::%player's uuid%} to now
+            while {cooldown2::%player's uuid%} is set:
+                wait 10 ticks
+                if time since {cooldown2::%player's uuid%} > 60 seconds:
+                    clear {cooldown2::%player's uuid%}
+                    send "<green><bold>Cooldown over! You may now summon again." to player
 
     
 command /eredeem:
@@ -600,6 +618,10 @@ command /eredeem:
         else if name of player's held item contains "<purple><bold>Event Voucher - Week 3":
             set player's held item to air
             set {event3::%player's uuid%} to true
+            send "<purple><bold><underline>Event voucher redeemed! (Will obtain after death)"
+        else if name of player's held item contains "<purple><bold>Event Voucher - Week 4":
+            set player's held item to air
+            set {event4::%player's uuid%} to true
             send "<purple><bold><underline>Event voucher redeemed! (Will obtain after death)"
         else if name of player's held item contains "<purple><bold>Extra heart":
             if {extraheart::%player's uuid%} is not set:
@@ -648,6 +670,9 @@ on entity target:
     apply infinite resistance of tier 2 to entity
     if entity is blaze:
         if "%entity's target%" is "%{fireimmune}%":
+            cancel event
+    if entity is zombie:
+        if entity's name contains "%entity's target%":
             cancel event
     if entity is zombified piglin:
         chance of 11%:
@@ -702,7 +727,7 @@ on death of a zombified piglin:
 on command "warp":
     if {countdown::%player's uuid%} is not set:
         cancel event
-        send "<red><bold>DO NOT MOVE! When the countdown is over use /warp again."
+        send "<red><bold>DO NOT MOVE! When the countdown is over <green><bold>use /warp again."
         set {_loc} to location of block at player
         play sound "entity.enderman.teleport" to player
         loop 5 times:
@@ -720,7 +745,7 @@ on command "warp":
 on command "team warp":
     if {countdown::%player's uuid%} is not set:
         cancel event
-        send "<red><bold>DO NOT MOVE! When the countdown is over use /team warp again."
+        send "<red><bold>DO NOT MOVE! When the countdown is over <green><bold>use /team warp again."
         set {_loc} to location of block at player
         play sound "entity.enderman.teleport" to player
         loop 5 times:
@@ -738,7 +763,7 @@ on command "team warp":
 on command "team home":
     if {countdown::%player's uuid%} is not set:
         cancel event
-        send "<red><bold>DO NOT MOVE! When the countdown is over use /team home again."
+        send "<red><bold>DO NOT MOVE! When the countdown is over <green><bold>use /team home again."
         set {_loc} to location of block at player
         play sound "entity.enderman.teleport" to player
         loop 5 times:
@@ -757,7 +782,7 @@ on command "team home":
 on command "home":
     if {countdown::%player's uuid%} is not set:
         cancel event
-        send "<red><bold>DO NOT MOVE! When the countdown is over use /home again."
+        send "<red><bold>DO NOT MOVE! When the countdown is over <green><bold>use /home again."
         set {_loc} to location of block at player
         play sound "entity.enderman.teleport" to player
         loop 5 times:
