@@ -25,29 +25,29 @@ command /vip1:
         set slot 4 of player's inventory to 64 of glowstone
         set slot 5 of player's inventory to 64 of respawn anchor
         set slot 6 of player's inventory to bow of power 5 and punch 2 and unbreaking 3 and mending
-        set slot 7 of player's inventory to totem of undying
+        set slot 7 of player's inventory to totem of undying of mending
         set slot 8 of player's inventory to 64 of golden apple
         set slot 9 of player's inventory to 16 of ender pearl
         set slot 18 of player's inventory to 16 of ender pearl
         set slot 27 of player's inventory to 16 of ender pearl
         set slot 28 of player's inventory to 64 of experience bottle
-        set slot 10 of player's inventory to totem of undying
-        set slot 19 of player's inventory to totem of undying
-        set slot 14 of player's inventory to totem of undying
-        set slot 11 of player's inventory to totem of undying
-        set slot 12 of player's inventory to totem of undying
-        set slot 13 of player's inventory to totem of undying
-        set slot 20 of player's inventory to totem of undying
-        set slot 21 of player's inventory to totem of undying
-        set slot 22 of player's inventory to totem of undying
-        set slot 23 of player's inventory to totem of undying
-        set slot 29 of player's inventory to totem of undying
-        set slot 30 of player's inventory to totem of undying
-        set slot 31 of player's inventory to totem of undying
-        set slot 32 of player's inventory to totem of undying
+        set slot 10 of player's inventory to totem of undying of mending
+        set slot 19 of player's inventory to totem of undying of mending
+        set slot 14 of player's inventory to totem of undying of mending
+        set slot 11 of player's inventory to totem of undying of mending
+        set slot 12 of player's inventory to totem of undying of mending
+        set slot 13 of player's inventory to totem of undying of mending
+        set slot 20 of player's inventory to totem of undying of mending
+        set slot 21 of player's inventory to totem of undying of mending
+        set slot 22 of player's inventory to totem of undying of mending
+        set slot 23 of player's inventory to totem of undying of mending
+        set slot 29 of player's inventory to totem of undying of mending
+        set slot 30 of player's inventory to totem of undying of mending
+        set slot 31 of player's inventory to totem of undying of mending
+        set slot 32 of player's inventory to totem of undying of mending
         set slot 15 of player's inventory to 64 of tipped arrow of long slow falling
         set slot 24 of player's inventory to shield of unbreaking 3 and mending
-        set the off hand item of player to totem of undying
+        set the off hand item of player to totem of undying of mending
 command /vip2:
     permission: skript.vip
     permission message: Hey! You need to pay to use this command ;)
@@ -66,29 +66,29 @@ command /vip2:
         set slot 4 of player's inventory to 64 of glowstone
         set slot 5 of player's inventory to 64 of respawn anchor
         set slot 6 of player's inventory to bow of power 5 and punch 2 and unbreaking 3 and mending
-        set slot 7 of player's inventory to totem of undying
+        set slot 7 of player's inventory to totem of undying of mending
         set slot 8 of player's inventory to 64 of golden apple
         set slot 9 of player's inventory to 16 of ender pearl
         set slot 18 of player's inventory to 16 of ender pearl
         set slot 27 of player's inventory to 16 of ender pearl
         set slot 28 of player's inventory to 64 of experience bottle
-        set slot 10 of player's inventory to totem of undying
-        set slot 19 of player's inventory to totem of undying
-        set slot 14 of player's inventory to totem of undying
-        set slot 11 of player's inventory to totem of undying
-        set slot 12 of player's inventory to totem of undying
-        set slot 13 of player's inventory to totem of undying
-        set slot 20 of player's inventory to totem of undying
-        set slot 21 of player's inventory to totem of undying
-        set slot 22 of player's inventory to totem of undying
-        set slot 23 of player's inventory to totem of undying
-        set slot 29 of player's inventory to totem of undying
-        set slot 30 of player's inventory to totem of undying
-        set slot 31 of player's inventory to totem of undying
-        set slot 32 of player's inventory to totem of undying
+        set slot 10 of player's inventory to totem of undying of mending
+        set slot 19 of player's inventory to totem of undying of mending
+        set slot 14 of player's inventory to totem of undying of mending
+        set slot 11 of player's inventory to totem of undying of mending
+        set slot 12 of player's inventory to totem of undying of mending
+        set slot 13 of player's inventory to totem of undying of mending
+        set slot 20 of player's inventory to totem of undying of mending
+        set slot 21 of player's inventory to totem of undying of mending
+        set slot 22 of player's inventory to totem of undying of mending
+        set slot 23 of player's inventory to totem of undying of mending
+        set slot 29 of player's inventory to totem of undying of mending
+        set slot 30 of player's inventory to totem of undying of mending
+        set slot 31 of player's inventory to totem of undying of mending
+        set slot 32 of player's inventory to totem of undying of mending
         set slot 15 of player's inventory to 64 of tipped arrow of long slow falling
         set slot 24 of player's inventory to shield of unbreaking 3 and mending
-        set the off hand item of player to totem of undying
+        set the off hand item of player to totem of undying of mending
 on damage:
     if victim is a dropped item:
         victim is not dropped moss block
@@ -166,51 +166,62 @@ on respawn:
         if {event3::%player's uuid%} is set:
             give player (netherite sword of knockback 1 and sweeping edge 3 and curse of vanishing named "<dark gray><bold>[Permanent] <red><bold>Vampiric Blade")
             set {sharpness::%player's uuid%} to 0
+        if {event4::%player's uuid%} is set:
+            give player blaze rod of knockback 5 and curse of vanishing named "<dark grey><bold>[Permanent] <purple><bold>Necromantic Staff"
 
 
 function randomKit(p: player):
-    set {_Helmet} to random integer between 1 and 3
+    set {_Helmet} to random integer between 1 and 5
     if {_Helmet} is 1:
-        set {_p}'s helmet to iron helmet of protection 4 and unbreaking 3 and curse of vanishing
+        set {_p}'s helmet to iron helmet of protection 3 and unbreaking 3 and curse of vanishing
     else if {_Helmet} is 2:
-        set {_p}'s helmet to diamond helmet of protection 2 and unbreaking 3 and curse of vanishing
+        set {_p}'s helmet to diamond helmet of protection 1 and blast protection 1 and unbreaking 3 and mending
     else if {_Helmet} is 3:
-        set {_p}'s helmet to diamond helmet of protection 3 and mending
+        set {_p}'s helmet to diamond helmet of protection 1 and blast protection 3 and mending
     else if {_Helmet} is 4:
-        set {_p}'s helmet to gold helmet of protection 10 and unbreaking 3
+        set {_p}'s helmet to gold helmet of protection 8 and unbreaking 3 and curse of vanishing
+    else if {_Helmet} is 5:
+        set {_p}'s helmet to chainmail helmet of protection 4 and unbreaking 3 and curse of vanishing
 
-    set {_Chestplate} to random integer between 1 and 4
+    set {_Chestplate} to random integer between 1 and 5
     if {_Chestplate} is 1:
-        set {_p}'s Chestplate to iron Chestplate of protection 4 and unbreaking 3 and curse of vanishing
+        set {_p}'s Chestplate to iron Chestplate of protection 3 and unbreaking 3 and curse of vanishing
     else if {_Chestplate} is 2:
-        set {_p}'s Chestplate to diamond Chestplate of protection 2 and unbreaking 3 and curse of vanishing
+        set {_p}'s Chestplate to diamond Chestplate of protection 1 and blast protection 1 and mending
     else if {_Chestplate} is 3:
-        set {_p}'s Chestplate to diamond Chestplate of protection 3 and mending
+        set {_p}'s Chestplate to diamond Chestplate of protection 1 and blast protection 3 and mending
     else if {_Chestplate} is 4:
-        set {_p}'s Chestplate to gold Chestplate of protection 10 and unbreaking 3 and curse of vanishing
+        set {_p}'s Chestplate to gold Chestplate of protection 8 and unbreaking 3 and curse of vanishing
+    else if {_Chestplate} is 5:
+        set {_p}'s chestplate to chainmail chestplate of protection 4 and unbreaking 3 and curse of vanishing
     
-    set {_Leggings} to random integer between 1 and 4
+    set {_Leggings} to random integer between 1 and 5
     if {_Leggings} is 1:
-        set {_p}'s Leggings to iron Leggings of protection 4 and unbreaking 3 and blast protection 4 and curse of vanishing
+        set {_p}'s Leggings to iron Leggings of protection 3 and unbreaking 3 and blast protection 4 and curse of vanishing
     else if {_Leggings} is 2:
-        set {_p}'s Leggings to diamond Leggings of protection 2 and unbreaking 3 and blast protection 2 and curse of vanishing
+        set {_p}'s Leggings to diamond Leggings of protection 2 and unbreaking 3 and blast protection 2 and mending
     else if {_Leggings} is 3:
-        set {_p}'s Leggings to diamond Leggings of blast protection 3 and mending
+        set {_p}'s Leggings to diamond Leggings of blast protection 3 and protection 1 and mending
     else if {_Leggings} is 4:
-        set {_p}'s Leggings to gold Leggings of protection 10 and unbreaking 3 and blast protection 4 and curse of vanishing
-    set {_Boots} to random integer between 1 and 4
+        set {_p}'s Leggings to gold Leggings of protection 8 and unbreaking 3 and blast protection 4 and curse of vanishing
+    else if {_Leggings} is 5:
+        set {_p}'s leggings to chainmail leggings of protection 4 and unbreaking 3 and curse of vanishing
+
+    set {_Boots} to random integer between 1 and 5
     if {_Boots} is 1:
-        set {_p}'s Boots to iron Boots of protection 4 and unbreaking 3 and curse of vanishing
+        set {_p}'s Boots to iron Boots of protection 3 and unbreaking 3 and curse of vanishing
     else if {_Boots} is 2:
-        set {_p}'s Boots to diamond Boots of protection 2 and unbreaking 3 and curse of vanishing
+        set {_p}'s Boots to diamond Boots of protection 1 and blast protection 1 and unbreaking 3 and mending
     else if {_Boots} is 3:
-        set {_p}'s Boots to diamond Boots of protection 3 and mending
+        set {_p}'s Boots to diamond Boots of protection 1 and mending and blast protection 3
     else if {_Boots} is 4:
-        set {_p}'s Boots to gold Boots of protection 10 and unbreaking 3 and curse of vanishing
+        set {_p}'s Boots to gold Boots of protection 8 and unbreaking 3 and curse of vanishing
+    else if {_Boots} is 5:
+        set {_p}'s boots to chainmail boots of protection 4 and unbreaking 3 and curse of vanishing
     
     set {_Sword} to random integer between 1 and 4 
     if {_Sword} is 1:
-        set slot 0 of {_p}'s inventory to iron sword of sharpness 2 and knockback 2 and curse of vanishing
+        set slot 0 of {_p}'s inventory to iron sword of sharpness 2 and knockback 1 and curse of vanishing
     else if {_Sword} is 2:
         set slot 0 of {_p}'s inventory to diamond sword of sharpness 3 and knockback 1 and curse of vanishing
     else if {_Sword} is 3:
@@ -257,53 +268,55 @@ function randomKit(p: player):
             set slot 6 of {_p}'s inventory to {_item}
     set {_Food} to random integer between 1 and 3
     if {_Food} is 1:
-        set slot 8 of {_p}'s inventory to 16 of golden carrot of curse of vanishing
+        set slot 8 of {_p}'s inventory to 8 of golden carrot of curse of vanishing
     else if {_Food} is 2:
-        set slot 8 of {_p}'s inventory to 32 of steak of curse of vanishing
+        set slot 8 of {_p}'s inventory to 16 of steak of curse of vanishing
     else if {_Food} is 3:
-        set slot 8 of {_p}'s inventory to 16 of golden apple 
+        set slot 8 of {_p}'s inventory to 4 of golden apple 
 		
-    set {_Epearl} to random integer between 1 and 3
+    set {_Epearl} to random integer between 1 and 8
     if {_Epearl} is 1:
-        set slot 1 of {_p}'s inventory to 4 of ender pearl
+        set slot 1 of {_p}'s inventory to 1 of ender pearl
     else if {_Epearl} is 2:
-        set slot 1 of {_p}'s inventory to 8 of ender pearl
+        set slot 1 of {_p}'s inventory to 2 of ender pearl
     else if {_Epearl} is 3:
-        set slot 1 of {_p}'s inventory to 16 of ender pearl
+        set slot 1 of {_p}'s inventory to 2 of ender pearl
 		
-    set {_Weapon} to random integer between 1 and 3
+    set {_Weapon} to random integer between 1 and 5
     if {_Weapon} is 1:
-        set slot 2 of {_p}'s inventory to 8 of end crystal
-        set slot 3 of {_p}'s inventory to 20 of obsidian
+        set slot 2 of {_p}'s inventory to 4 of end crystal
+        set slot 3 of {_p}'s inventory to 10 of obsidian
         set slot 4 of {_p}'s inventory to 10 of glowstone
         set slot 5 of {_p}'s inventory to 5 of respawn anchor
     else if {_Weapon} is 2:
-        set slot 2 of {_p}'s inventory to 16 of End Crystal
-        set slot 3 of {_p}'s inventory to 40 of Obsidian
+        set slot 2 of {_p}'s inventory to 8 of End Crystal
+        set slot 3 of {_p}'s inventory to 10 of Obsidian
     else if {_Weapon} is 3:
         set slot 4 of {_p}'s inventory to 20 of glowstone
         set slot 5 of {_p}'s inventory to 10 of respawn anchor
         set slot 3 of {_p}'s inventory to 64 of cobblestone of curse of vanishing
-		
-    set the off hand item of {_p} to totem of undying of curse of vanishing
+    chance of 20%:	
+        set the off hand item of {_p} to totem of undying of curse of vanishing
     set {_totems} to random integer between 1 and 8
     if {_totems} is 3:
-        set slot 9 of {_p}'s inventory to totem of undying of curse of vanishing
-        set slot 10 of {_p}'s inventory to totem of undying of curse of vanishing
-        set slot 11 of {_p}'s inventory to totem of undying of curse of vanishing
         set slot 26 of {_p}'s inventory to wooden axe of curse of vanishing
     if {_totems} is 4:
         set slot 9 of {_p}'s inventory to totem of undying of curse of vanishing
-        set slot 10 of {_p}'s inventory to totem of undying of curse of vanishing
-        set slot 11 of {_p}'s inventory to totem of undying of curse of vanishing
-        set slot 12 of {_p}'s inventory to totem of undying of curse of vanishing
         set slot 26 of {_p}'s inventory to stone axe of curse of vanishing
     if {_totems} is 5:
         set slot 9 of {_p}'s inventory to totem of undying of curse of vanishing
     if {_totems} is 6:
-        set slot 9 of {_p}'s inventory to totem of undying of curse of vanishing
-        set slot 10 of {_p}'s inventory to totem of undying of curse of vanishing
-    set slot 7 of {_p}'s inventory to totem of undying of curse of vanishing
+        set slot 7 of {_p}'s inventory to totem of undying of curse of vanishing
+        set slot 26 of {_p}'s inventory to diamond axe of curse of vanishing
+
+    chance of 3%:
+        set {_p}'s boots to netherite boots of protection 1 and blast protection 3
+    chance of 3%:
+        set {_p}'s leggings to netherite leggings of protection 1 and blast protection 3
+    chance of 3%:
+        set {_p}'s chestplate to netherite chestplate of protection 1 and blast protection 3
+    chance of 3%:
+        set {_p}'s helmet to netherite helmet of protection 1 and blast protection 3
 
 
     set {_specialkit} to random integer between 1 and 102
