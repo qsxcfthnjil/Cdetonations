@@ -160,9 +160,9 @@ on respawn:
         {norekit} is not player's uuid
         randomKit(player)
         if {event1::%player's uuid%} is set:
-            give player (amethyst silence netherite boots of protection 4 and unbreaking 3 and mending and curse of vanishing) named "<dark gray><bold>Permanent Boots"
+            give player (amethyst silence netherite boots of protection 3 and unbreaking 3 and mending and curse of vanishing) named "<dark gray><bold>Permanent Boots"
         if {event2::%player's uuid%} is set:
-            give player (amethyst silence netherite chestplate of protection 4 and unbreaking 3 and mending and curse of vanishing) named "<dark gray><bold>Permanent Chestplate"
+            give player (amethyst silence netherite chestplate of protection 3 and unbreaking 3 and mending and curse of vanishing) named "<dark gray><bold>Permanent Chestplate"
         if {event3::%player's uuid%} is set:
             give player (netherite sword of knockback 1 and sweeping edge 3 and curse of vanishing named "<dark gray><bold>[Permanent] <red><bold>Vampiric Blade")
             set {sharpness::%player's uuid%} to 0
@@ -171,53 +171,70 @@ on respawn:
 
 
 function randomKit(p: player):
-    set {_Helmet} to random integer between 1 and 5
+    set {_Helmet} to random integer between 1 and 7
     if {_Helmet} is 1:
-        set {_p}'s helmet to iron helmet of protection 3 and unbreaking 3 and curse of vanishing
+        set {_p}'s helmet to iron helmet of protection 1 and unbreaking 1 and blast protecion 2
     else if {_Helmet} is 2:
-        set {_p}'s helmet to diamond helmet of protection 1 and blast protection 1 and unbreaking 3 and mending
+        set {_p}'s helmet to iron helmet of protection 2 and unbreaking 1 and blast protection 3
     else if {_Helmet} is 3:
-        set {_p}'s helmet to diamond helmet of protection 1 and blast protection 3 and mending
+        set {_p}'s helmet to diamond helmet of protection 1
     else if {_Helmet} is 4:
-        set {_p}'s helmet to gold helmet of protection 8 and unbreaking 3 and curse of vanishing
+        set {_p}'s helmet to diamond helmet of protection 2
     else if {_Helmet} is 5:
-        set {_p}'s helmet to chainmail helmet of protection 4 and unbreaking 3 and curse of vanishing
+        set {_p}'s helmet to diamond helmet of protection 2 and blast protection 3
+    else if {_Helmet} is 6:
+        set {_p}'s helmet to gold helmet of protection 4 and unbreaking 1
+    else if {_Helmet} is 7:
+        set {_p}'s helmet to chainmail helmet of protection 3 and unbreaking 1
 
-    set {_Chestplate} to random integer between 1 and 5
+    set {_Chestplate} to random integer between 1 and 7
     if {_Chestplate} is 1:
-        set {_p}'s Chestplate to iron Chestplate of protection 3 and unbreaking 3 and curse of vanishing
+        set {_p}'s chestplate to iron chestplate of protection 1 and unbreaking 1 and blast protecion 2
     else if {_Chestplate} is 2:
-        set {_p}'s Chestplate to diamond Chestplate of protection 1 and blast protection 1 and mending
+        set {_p}'s chestplate to iron chestplate of protection 2 and unbreaking 1 and blast protection 3
     else if {_Chestplate} is 3:
-        set {_p}'s Chestplate to diamond Chestplate of protection 1 and blast protection 3 and mending
+        set {_p}'s chestplate to diamond chestplate of protection 1
     else if {_Chestplate} is 4:
-        set {_p}'s Chestplate to gold Chestplate of protection 8 and unbreaking 3 and curse of vanishing
+        set {_p}'s chestplate to diamond chestplate of protection 2
     else if {_Chestplate} is 5:
-        set {_p}'s chestplate to chainmail chestplate of protection 4 and unbreaking 3 and curse of vanishing
-    
-    set {_Leggings} to random integer between 1 and 5
-    if {_Leggings} is 1:
-        set {_p}'s Leggings to iron Leggings of protection 3 and unbreaking 3 and blast protection 4 and curse of vanishing
-    else if {_Leggings} is 2:
-        set {_p}'s Leggings to diamond Leggings of protection 2 and unbreaking 3 and blast protection 2 and mending
-    else if {_Leggings} is 3:
-        set {_p}'s Leggings to diamond Leggings of blast protection 3 and protection 1 and mending
-    else if {_Leggings} is 4:
-        set {_p}'s Leggings to gold Leggings of protection 8 and unbreaking 3 and blast protection 4 and curse of vanishing
-    else if {_Leggings} is 5:
-        set {_p}'s leggings to chainmail leggings of protection 4 and unbreaking 3 and curse of vanishing
+        set {_p}'s chestplate to diamond chestplate of protection 2 and blast protection 3
+    else if {_Chestplate} is 6:
+        set {_p}'s chestplate to gold chestplate of protection 4 and unbreaking 1
+    else if {_Chestplate} is 7:
+        set {_p}'s chestplate to chainmail chestplate of protection 3 and unbreaking 1
 
-    set {_Boots} to random integer between 1 and 5
+    
+    set {_Leggings} to random integer between 1 and 7
+    if {_Leggings} is 1:
+        set {_p}'s leggings to iron leggings of protection 1 and unbreaking 1 and blast protecion 2
+    else if {_Leggings} is 2:
+        set {_p}'s leggings to iron leggings of protection 2 and unbreaking 1 and blast protection 3
+    else if {_Leggings} is 3:
+        set {_p}'s leggings to diamond leggings of protection 1
+    else if {_Leggings} is 4:
+        set {_p}'s leggings to diamond leggings of protection 2
+    else if {_Leggings} is 5:
+        set {_p}'s leggings to diamond leggings of protection 2 and blast protection 3
+    else if {_Leggings} is 6:
+        set {_p}'s leggings to gold leggings of protection 4 and unbreaking 1
+    else if {_Leggings} is 7:
+        set {_p}'s leggings to chainmail leggings of protection 3 and unbreaking 1
+
+    set {_Boots} to random integer between 1 and 7
     if {_Boots} is 1:
-        set {_p}'s Boots to iron Boots of protection 3 and unbreaking 3 and curse of vanishing
+        set {_p}'s boots to iron boots of protection 1 and unbreaking 1 and blast protecion 2
     else if {_Boots} is 2:
-        set {_p}'s Boots to diamond Boots of protection 1 and blast protection 1 and unbreaking 3 and mending
+        set {_p}'s boots to iron boots of protection 2 and unbreaking 1 and blast protection 3
     else if {_Boots} is 3:
-        set {_p}'s Boots to diamond Boots of protection 1 and mending and blast protection 3
+        set {_p}'s boots to diamond boots of protection 1
     else if {_Boots} is 4:
-        set {_p}'s Boots to gold Boots of protection 8 and unbreaking 3 and curse of vanishing
+        set {_p}'s boots to diamond boots of protection 2
     else if {_Boots} is 5:
-        set {_p}'s boots to chainmail boots of protection 4 and unbreaking 3 and curse of vanishing
+        set {_p}'s boots to diamond boots of protection 2 and blast protection 3
+    else if {_Boots} is 6:
+        set {_p}'s boots to gold boots of protection 4 and unbreaking 1
+    else if {_Boots} is 7:
+        set {_p}'s boots to chainmail boots of protection 3 and unbreaking 1
     
     set {_Sword} to random integer between 1 and 4 
     if {_Sword} is 1:
