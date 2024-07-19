@@ -10,8 +10,8 @@ command /norekit <player>:
 command /vip1:
     permission: skript.vip
     permission message: Hey! You need to pay to use this command ;)
-    cooldown: 15 minutes
-    cooldown message: The cooldown for this command is 15 minutes, sorry! :D
+    cooldown: 32 hours
+    cooldown message: The cooldown for this command is 32 hours, sorry! :D
     trigger:
         clear player's inventory
         set player's helmet to emerald silence diamond helmet of protection 4 and unbreaking 3 and mending named "<green><bold>VIP HELMET"
@@ -51,8 +51,8 @@ command /vip1:
 command /vip2:
     permission: skript.vip
     permission message: Hey! You need to pay to use this command ;)
-    cooldown: 8 hours
-    cooldown message: The cooldown for this command is 8 hours, sorry! :D
+    cooldown: 58 hours
+    cooldown message: The cooldown for this command is 58 hours, sorry! :D
     trigger:
         clear player's inventory
         set player's helmet to emerald silence netherite helmet of protection 4 and unbreaking 3 and mending named "<green><bold>VIP HELMET"
