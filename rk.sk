@@ -154,6 +154,23 @@ on chat:
                 send "&dYou recieved 16 coins for welcoming a new player! :D"
                 set {playerwelcomecooldown::%player's uuid%} to true
 
+
+
+
+
+on place of tnt:
+    set event-block to air
+    spawn primed tnt at event-location
+
+
+
+
+
+
+
+
+
+
 on respawn:
     if respawn reason = death respawn:
         wait 6 seconds
@@ -173,7 +190,7 @@ on respawn:
 function randomKit(p: player):
     set {_Helmet} to random integer between 1 and 7
     if {_Helmet} is 1:
-        set {_p}'s helmet to iron helmet of protection 1 and unbreaking 1 and blast protecion 2
+        set {_p}'s helmet to iron helmet of protection 1 and unbreaking 1 and blast protection 2
     else if {_Helmet} is 2:
         set {_p}'s helmet to iron helmet of protection 2 and unbreaking 1 and blast protection 3
     else if {_Helmet} is 3:
@@ -189,7 +206,7 @@ function randomKit(p: player):
 
     set {_Chestplate} to random integer between 1 and 7
     if {_Chestplate} is 1:
-        set {_p}'s chestplate to iron chestplate of protection 1 and unbreaking 1 and blast protecion 2
+        set {_p}'s chestplate to iron chestplate of protection 1 and unbreaking 1 and blast protection 2
     else if {_Chestplate} is 2:
         set {_p}'s chestplate to iron chestplate of protection 2 and unbreaking 1 and blast protection 3
     else if {_Chestplate} is 3:
@@ -206,7 +223,7 @@ function randomKit(p: player):
     
     set {_Leggings} to random integer between 1 and 7
     if {_Leggings} is 1:
-        set {_p}'s leggings to iron leggings of protection 1 and unbreaking 1 and blast protecion 2
+        set {_p}'s leggings to iron leggings of protection 1 and unbreaking 1 and blast protection 2
     else if {_Leggings} is 2:
         set {_p}'s leggings to iron leggings of protection 2 and unbreaking 1 and blast protection 3
     else if {_Leggings} is 3:
@@ -222,7 +239,7 @@ function randomKit(p: player):
 
     set {_Boots} to random integer between 1 and 7
     if {_Boots} is 1:
-        set {_p}'s boots to iron boots of protection 1 and unbreaking 1 and blast protecion 2
+        set {_p}'s boots to iron boots of protection 1 and unbreaking 1 and blast protection 2
     else if {_Boots} is 2:
         set {_p}'s boots to iron boots of protection 2 and unbreaking 1 and blast protection 3
     else if {_Boots} is 3:
@@ -238,121 +255,163 @@ function randomKit(p: player):
     
     set {_Sword} to random integer between 1 and 4 
     if {_Sword} is 1:
-        set slot 0 of {_p}'s inventory to iron sword of sharpness 2 and knockback 1 and curse of vanishing
+        set slot 0 of {_p}'s inventory to iron sword of sharpness 1
     else if {_Sword} is 2:
-        set slot 0 of {_p}'s inventory to diamond sword of sharpness 3 and knockback 1 and curse of vanishing
+        set slot 0 of {_p}'s inventory to diamond sword of sharpness 1
     else if {_Sword} is 3:
-        set slot 0 of {_p}'s inventory to diamond sword of sharpness 3 and sweeping edge 3 and fire aspect 2 and curse of vanishing
+        set slot 0 of {_p}'s inventory to diamond sword of sharpness 2
     else if {_Sword} is 4:
-        set slot 0 of {_p}'s inventory to diamond sword of sharpness 1 and curse of vanishing
+        set slot 0 of {_p}'s inventory to netherite sword of sharpness 1
+    else if {_Sword} is 5:
+        set slot 0 of {_p}'s inventory to netherite sword of sharpness 1 and fire aspect 1
+    else if {_Sword} is 6:
+        set slot 0 of {_p}'s inventory to netherite sword of sharpness 2
 
-    set {_Util} to random integer between 1 and 3
-	
-    if {_Util} is 1:
-        set {_Pickaxe} to random integer between 1 and 4 
-        if {_Pickaxe} is 1:
-            set slot 6 of {_p}'s inventory to iron Pickaxe of efficiency 1 and fortune 3 and curse of vanishing
-        else if {_Pickaxe} is 2:
-            set slot 6 of {_p}'s inventory to diamond Pickaxe of efficiency 3 and curse of vanishing
-        else if {_Pickaxe} is 3:
-            set slot 6 of {_p}'s inventory to diamond Pickaxe of efficiency 5
-        else if {_Pickaxe} is 4:
-            set slot 6 of {_p}'s inventory to diamond Pickaxe of fortune 3
 
-    if {_Util} is 2:
-        set {_Bow} to random integer between 1 and 5 
-        if {_Bow} is 6:
-            set slot 7 of {_p}'s inventory to bow of power 4 and curse of vanishing
-        else if {_Bow} is 2:
-            set slot 6 of {_p}'s inventory to bow of power 3 and curse of vanishing
-        else if {_Bow} is 3:
-            set slot 6 of {_p}'s inventory to bow of punch 2 and curse of vanishing
-        set slot 17 of {_p}'s inventory to 6 of tipped arrow of slow falling
-
-    if {_Util} is 3:
-        set {_Shield} to random integer between 1 and 3
-        if {_Shield} is 1:
-            set {_item} to shield of unbreaking 3
-            set durability of {_item} to 100
-            set slot 6 of {_p}'s inventory to {_item}
-        if {_Shield} is 2:
-            set {_item} to shield
-            set durability of {_item} to 100
-            set slot 6 of {_p}'s inventory to {_item}
-        if {_Shield} is 3:
-            set {_item} to shield
-            set durability of {_item} to 150
-            set slot 6 of {_p}'s inventory to {_item}
     set {_Food} to random integer between 1 and 3
     if {_Food} is 1:
-        set slot 8 of {_p}'s inventory to 8 of golden carrot of curse of vanishing
+        set slot 8 of {_p}'s inventory to 8 of golden carrot
     else if {_Food} is 2:
-        set slot 8 of {_p}'s inventory to 16 of steak of curse of vanishing
+        set slot 8 of {_p}'s inventory to 12 of steak
     else if {_Food} is 3:
-        set slot 8 of {_p}'s inventory to 4 of golden apple 
+        set slot 8 of {_p}'s inventory to 32 of bread
 		
-    set {_Epearl} to random integer between 1 and 8
-    if {_Epearl} is 1:
-        set slot 1 of {_p}'s inventory to 1 of ender pearl
-    else if {_Epearl} is 2:
-        set slot 1 of {_p}'s inventory to 2 of ender pearl
-    else if {_Epearl} is 3:
-        set slot 1 of {_p}'s inventory to 2 of ender pearl
 		
-    set {_Weapon} to random integer between 1 and 5
+    set {_Weapon} to random integer between 1 and 7
     if {_Weapon} is 1:
-        set slot 2 of {_p}'s inventory to 4 of end crystal
-        set slot 3 of {_p}'s inventory to 10 of obsidian
-        set slot 4 of {_p}'s inventory to 10 of glowstone
-        set slot 5 of {_p}'s inventory to 5 of respawn anchor
+        set slot 4 of {_p}'s inventory to lava bucket
+        set slot 7 of {_p}'s inventory to water bucket
     else if {_Weapon} is 2:
-        set slot 2 of {_p}'s inventory to 8 of End Crystal
-        set slot 3 of {_p}'s inventory to 10 of Obsidian
+        set slot 4 of {_p}'s inventory to water bucket
+        set slot 7 of {_p}'s inventory to water bucket
     else if {_Weapon} is 3:
-        set slot 4 of {_p}'s inventory to 20 of glowstone
-        set slot 5 of {_p}'s inventory to 10 of respawn anchor
-        set slot 3 of {_p}'s inventory to 64 of cobblestone of curse of vanishing
-    chance of 20%:	
-        set the off hand item of {_p} to totem of undying of curse of vanishing
-    set {_totems} to random integer between 1 and 8
-    if {_totems} is 3:
-        set slot 26 of {_p}'s inventory to wooden axe of curse of vanishing
-    if {_totems} is 4:
-        set slot 9 of {_p}'s inventory to totem of undying of curse of vanishing
-        set slot 26 of {_p}'s inventory to stone axe of curse of vanishing
-    if {_totems} is 5:
-        set slot 9 of {_p}'s inventory to totem of undying of curse of vanishing
-    if {_totems} is 6:
-        set slot 7 of {_p}'s inventory to totem of undying of curse of vanishing
-        set slot 26 of {_p}'s inventory to diamond axe of curse of vanishing
+        set slot 4 of {_p}'s inventory to lava bucket
+    else if {_Weapon} is 4:
+        set slot 5 of {_p}'s inventory to 16 of cobweb
+        set slot 4 of {_p}'s inventory to lava bucket
+        set slot 7 of {_p}'s inventory to water bucket
+    else if {_Weapon} is 5:
+        set slot 5 of {_p}'s inventory to 16 of cobweb
+    else if {_Weapon} is 6:
+        set slot 5 of {_p}'s inventory to 4 of end crystal   
+        set slot 3 of {_p}'s inventory to 8 of Obsidian
+    else if {_Weapon} is 7:
+        set slot 4 of {_p}'s inventory to 6 of glowstone
+        set slot 5 of {_p}'s inventory to 2 of respawn anchor
+    chance of 10%:	
+        set the off hand item of {_p} to totem of undying
+    set {_axe} to random integer between 1 and 10
+    if {_axe} is 3:
+        set slot 2 of {_p}'s inventory to iron axe of sharpness 1
+    if {_axe} is 4:
+        set slot 2 of {_p}'s inventory to iron axe of sharpness 3
+    if {_axe} is 5:
+        set slot 2 of {_p}'s inventory to diamond axe of sharpness 1
+    if {_axe} is 6:
+        set slot 2 of {_p}'s inventory to diamond axe of sharpness 2
+    if {_axe} is 7:
+        set slot 2 of {_p}'s inventory to netherite axe of sharpness 1
+    
+    chance of 5%:
+        chance of 50%:
+            set {_p}'s boots to netherite boots of protection 1 and blast protection 3
+        chance of 50%:
+            set {_p}'s boots to netherite boots of protection 1
+    chance of 5%:
+        chance of 50%:
+            set {_p}'s leggings to netherite leggings of protection 1 and blast protection 3
+        chance of 50%:
+            set {_p}'s leggings to netherite leggings of protection 1
+    chance of 5%:
+        chance of 50%:
+            set {_p}'s chestplate to netherite chestplate of protection 1 and blast protection 3
+        chance of 50%:
+            set {_p}'s chestplate to netherite chestplate of protection 1
+    chance of 5%:
+        chance of 50%:
+            set {_p}'s helmet to netherite helmet of protection 1 and blast protection 3
+        chance of 50%:
+            set {_p}'s helmet to netherite helmet of protection 1
 
-    chance of 3%:
-        set {_p}'s boots to netherite boots of protection 1 and blast protection 3
-    chance of 3%:
-        set {_p}'s leggings to netherite leggings of protection 1 and blast protection 3
-    chance of 3%:
-        set {_p}'s chestplate to netherite chestplate of protection 1 and blast protection 3
-    chance of 3%:
-        set {_p}'s helmet to netherite helmet of protection 1 and blast protection 3
 
 
-    set {_specialkit} to random integer between 1 and 102
+    set {_Pickaxe} to random integer between 1 and 8
+    if {_Pickaxe} is 1:
+        give iron Pickaxe of efficiency 1 and fortune 3 to {_p}
+    else if {_Pickaxe} is 2:
+        give diamond Pickaxe of efficiency 3 to {_p}
+    else if {_Pickaxe} is 3:
+        give diamond Pickaxe of efficiency 2 to {_p}
+    else if {_Pickaxe} is 4:
+        give diamond Pickaxe of efficiency 1 to {_p}
+    else if {_Pickaxe} is 5:
+        give netherite Pickaxe of efficiency 2 to {_p}
+    else if {_Pickaxe} is 6:
+        give netherite Pickaxe of efficiency 1 to {_p}
+
+    set {_Bow} to random integer between 1 and 5 
+    if {_Bow} is 1:
+        give bow of power 1 to {_p}
+    else if {_Bow} is 2:
+        give bow of power 2 to {_p}
+    else if {_Bow} is 3:
+        give bow of punch 2 to {_p}
+    else if {_Bow} is 4:
+        give crossbow of piercing 2 to {_p}
+    else if {_Bow} is 5:
+        give crossbow of quick charge 2 to {_p}
+    set slot 17 of {_p}'s inventory to 24 arrows
+
+    set {_Shield} to random integer between 1 and 3
+    if {_Shield} is 1:
+        set {_item} to shield of unbreaking 3
+        set durability of {_item} to 100
+        give {_item} to {_p}
+    if {_Shield} is 2:
+        set {_item} to shield
+        give {_item} to {_p}
+    if {_Shield} is 3:
+        set {_item} to shield
+        set durability of {_item} to 200
+        give {_item} to {_p}
+
+    set {_block} to random integer between 1 and 2
+    if {_block} is 1:
+        give 32 of cobblestone to {_p}
+    else if {_block} is 2:
+        give 32 of oak planks to {_p}
+
+
+    chance of 10%:
+        give 16 tnt to {_p}
+    chance of 10%:
+        give 8 tnt to {_p}
+    chance of 10%:
+        give fishing rod named "<white><bold>Grappling Hook" to {_p}
+    chance of 10%:
+        give 2 feather named "&b&lSpeed" to {_p}
+    chance of 10%:
+        give 2 acacia button named "&c&lEject Button" to {_p}
+
+
+    set {_specialkit} to random integer between 1 and 150
     if {_specialkit} is 100:
         set {specialkitlist::%{_p}'s uuid%} to 1
         broadcast "<red><bold><italic>%{_p}% Has randomly recieved a DIVINE BLESSING: Fallen Armsman"
-        set slot 0 of {_p}'s inventory to crossbow of piercing 10 and curse of vanishing named "<white><bold>AWP"
+        set slot 0 of {_p}'s inventory to bow of multishot 5 and curse of vanishing named "<white><bold>AA-12"
         set the off hand item of {_p} to crossbow of quick charge 5 named "<grey><bold>M4A1"
         set slot 2 of {_p}'s inventory to 64 of tipped arrow of harming 
         set slot 3 of {_p}'s inventory to 64 of tipped arrow of harming 
-        set {_p}'s helmet to chainmail helmet of blast protection 5 and protection 2 and curse of vanishing and curse of binding
-        set {_p}'s chestplate to chainmail chestplate of blast protection 5 and protection 2 and curse of vanishing and curse of binding
-        set {_p}'s leggings to chainmail leggings of blast protection 5 and protection 2 and curse of vanishing and curse of binding
-        set {_p}'s boots to chainmail boots of blast protection 5 and protection 2 and curse of vanishing and curse of binding
+        set {_p}'s helmet to chainmail helmet of blast protection 5 and protection 4 and curse of vanishing and curse of binding
+        set {_p}'s chestplate to chainmail chestplate of blast protection 5 and protection 4 and curse of vanishing and curse of binding
+        set {_p}'s leggings to chainmail leggings of blast protection 5 and protection 4 and curse of vanishing and curse of binding
+        set {_p}'s boots to chainmail boots of blast protection 5 and protection 4 and curse of vanishing and curse of binding
+        give or drop 1280 arrows of curse of vanishing to {_p}
 
     if {_specialkit} is 101:
         set {specialkitlist::%{_p}'s uuid%} to 1
         broadcast "<red><bold><italic>%{_p}% Has randomly recieved a DIVINE BLESSING: Swordsman of the Abyss"
-        set slot 0 of {_p}'s inventory to (netherite sword of sharpness 5 and sweeping edge 3 and fire aspect 2) named "<grey><bold>Starless Night"
+        set slot 0 of {_p}'s inventory to (netherite sword of sharpness 2 and sweeping edge 3 and fire aspect 1) named "<grey><bold>Starless Night"
         set slot 1 of {_p}'s inventory to 16 of ender pearl
         set slot 2 of {_p}'s inventory to splash potion of strong strength
         set slot 3 of {_p}'s inventory to splash potion of strong speed
@@ -360,7 +419,7 @@ function randomKit(p: player):
         set slot 5 of {_p}'s inventory to splash potion of strong speed
         set slot 6 of {_p}'s inventory to splash potion of strong strength
         set slot 7 of {_p}'s inventory to splash potion of strong speed
-        set slot 8 of {_p}'s inventory to 64 of golden apple
+        set slot 8 of {_p}'s inventory to 12 of golden apple
         set slot 9 of {_p}'s inventory to splash potion of strong turtle master
         set slot 10 of {_p}'s inventory to splash potion of strong turtle master
         set slot 11 of {_p}'s inventory to splash potion of strong turtle master
@@ -368,10 +427,10 @@ function randomKit(p: player):
         set slot 13 of {_p}'s inventory to splash potion of strong turtle master
         set slot 14 of {_p}'s inventory to splash potion of strong turtle master
         set slot 15 of {_p}'s inventory to splash potion of strong turtle master
-        set {_p}'s helmet to red silence netherite helmet of protection 3 and unbreaking 3 and curse of binding
-        set {_p}'s chestplate to red silence netherite chestplate of protection 3 and unbreaking 3 and curse of binding
-        set {_p}'s leggings to red silence netherite leggings of protection 3 and blast protection 3 and unbreaking 3 and curse of binding
-        set {_p}'s boots to red silence netherite boots of protection 3 and unbreaking 3 and curse of binding
+        set {_p}'s helmet to red silence netherite helmet of protection 2 and unbreaking 3 and curse of binding
+        set {_p}'s chestplate to red silence netherite chestplate of protection 2 and unbreaking 3 and curse of binding
+        set {_p}'s leggings to red silence netherite leggings of protection 2 and blast protection 3 and unbreaking 3 and curse of binding
+        set {_p}'s boots to red silence netherite boots of protection 2 and unbreaking 3 and curse of binding
 on pick up:
     if event-item is end crystal:
         if {specialkitlist::%player's uuid%} is 1:
@@ -383,6 +442,12 @@ on pick up:
         if {pickupjunk::%player's uuid%} is not true:
             cancel event
     if event-item is moss block:
+        if {pickupjunk::%player's uuid%} is not true:
+            cancel event
+    if event-item is sandstone:
+        if {pickupjunk::%player's uuid%} is not true:
+            cancel event
+    if event-item is smooth sandstone:
         if {pickupjunk::%player's uuid%} is not true:
             cancel event
     if event-item is dirt:
@@ -412,3 +477,26 @@ on pick up:
     if event-item is cobbled deepslate:
         if {pickupores::%player's uuid%} is not true:
             cancel event
+
+on right click:
+    if name of player's held item contains "&b&lSpeed":
+        difference between now and {speedcooldown::%player's uuid%} is not less than 15 seconds
+        set {speedcooldown::%player's uuid%} to now
+        remove 1 feather named "&b&lSpeed" from player's inventory
+        apply speed of tier 7 to the player for 5 seconds
+        set the cooldown of held item for player to 15 seconds
+on place:
+    If name of player's tool is "&c&lEject Button":
+        cancel event
+        remove 1 acacia button named "&c&lEject Button" from player's inventory
+        loop all players in radius 10 of event-block:
+            apply resistance of tier 5 to loop-player for 1 second
+        create a safe explosion of force 10 at event-block
+command /afk <player>:
+    permission: op
+    trigger:
+        give 1 salmon named "&b&lAFK Token" to arg-1
+
+on anvil damage:
+    cancel event
+        
