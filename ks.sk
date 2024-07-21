@@ -3,8 +3,8 @@
 	
 options:
     rewardReq: 3, 5, 8, 10, 13, 15, 18, 20, 25, 30, 35, 40, 45 and 50
-    rewards: 64 experience bottle, 64 sunflower named "<reset><yellow>&lCoin", 128 experience bottle, 6 netherite ingot, 1 paper named "<reset><red>&lKillstreak Voucher", (1 of unbreakable diamond coast golden helmet of protection 9, unbreaking 255 and mending) named "<yellow><bold>CROWN", 4 paper named "<reset><red>&lKillstreak Voucher", 6 paper named "<reset><red>&lKillstreak Voucher", 7 paper named "<reset><red>&lKillstreak Voucher", 8 paper named "<reset><red>&lKillstreak Voucher", 9 paper named "<reset><red>&lKillstreak Voucher", 10 paper named "<reset><red>&lKillstreak Voucher", 10 paper named "<reset><red>&lKillstreak Voucher" and 15 paper named "<reset><red>&lKillstreak Voucher"
-    bounty: 32 sunflower named "<reset><yellow>&lCoin", 48 sunflower named "<reset><yellow>&lCoin", 64 sunflower named "<reset><yellow>&lCoin", 1 paper named "<reset><red>&lKillstreak Voucher", 2 paper named "<reset><red>&lKillstreak Voucher", 4 paper named "<reset><red>&lKillstreak Voucher", 5 paper named "<reset><red>&lKillstreak Voucher", 6 paper named "<reset><red>&lKillstreak Voucher", 7 paper named "<reset><red>&lKillstreak Voucher", 8 paper named "<reset><red>&lKillstreak Voucher", 9 paper named "<reset><red>&lKillstreak Voucher", 10 paper named "<reset><red>&lKillstreak Voucher", 11 paper named "<reset><red>&lKillstreak Voucher" and 20 paper named "<reset><red>&lKillstreak Voucher"
+    rewards: 5 sunflower named "<reset><yellow>&lCoin", 20 sunflower named "<reset><yellow>&lCoin", 64 sunflower named "<reset><yellow>&lCoin", 1 paper named "<reset><red>&lKillstreak Voucher", 1 paper named "<reset><red>&lKillstreak Voucher", (1 of unbreakable diamond coast golden helmet of protection 7, unbreaking 255 and mending) named "<yellow><bold>CROWN", 1 paper named "<reset><red>&lKillstreak Voucher", 1 paper named "<reset><red>&lKillstreak Voucher", 1 paper named "<reset><red>&lKillstreak Voucher", 1 paper named "<reset><red>&lKillstreak Voucher", 1 paper named "<reset><red>&lKillstreak Voucher", 1 paper named "<reset><red>&lKillstreak Voucher", 1 paper named "<reset><red>&lKillstreak Voucher" and 1 paper named "<reset><red>&lKillstreak Voucher"
+    bounty: 10 sunflower named "<reset><yellow>&lCoin", 32 sunflower named "<reset><yellow>&lCoin", 64 sunflower named "<reset><yellow>&lCoin", 1 paper named "<reset><red>&lKillstreak Voucher", 2 paper named "<reset><red>&lKillstreak Voucher", 4 paper named "<reset><red>&lKillstreak Voucher", 5 paper named "<reset><red>&lKillstreak Voucher", 6 paper named "<reset><red>&lKillstreak Voucher", 7 paper named "<reset><red>&lKillstreak Voucher", 8 paper named "<reset><red>&lKillstreak Voucher", 9 paper named "<reset><red>&lKillstreak Voucher", 10 paper named "<reset><red>&lKillstreak Voucher", 11 paper named "<reset><red>&lKillstreak Voucher" and 20 paper named "<reset><red>&lKillstreak Voucher"
 function checkKS(p: player):
     set {_uuid} to {_p}'s uuid
     set {_rewardReq::*} to {@rewardReq}
@@ -20,11 +20,10 @@ function checkKS(p: player):
         give {_rewards::8} to {_p}
         set {godmode::%{_uuid}%} to true
         while {godmode::%{_uuid}%} is true:
-            apply swiftness 2 to {_p}
-            apply glowing to {_p}
-            apply strength 2 to {_p}
+            apply swiftness 1 to {_p} for 5 seconds
+            apply glowing to {_p} for 5 seconds
             wait 100 ticks
-    else:
+    else if {killStreak::%{_uuid}%} is less than 50:
         loop {_rewardReq::*}:
             if {killStreak::%{_uuid}%} is loop-value:
                 broadcast "<red><bold>%{_p}% had reached a killstreak of %{killStreak::%{_uuid}%}%!"
@@ -35,7 +34,11 @@ function checkKS(p: player):
                     #add {_rewards::%loop-index%} to {_p}'s balance
                 give {_rewards::%loop-index%} to {_p}
                 stop
-
+    else:
+        {_uuid} is set
+        if mod({killStreak::%{_uuid}%},5) is 0:
+            broadcast "<red><bold>%{_p}% had reached a killstreak of %{killStreak::%{_uuid}%}%!"        
+            give 2 paper named "<reset><red>&lKillstreak Voucher" to {_p}
 #on death of player:
     #clear {killStreak::%victim's uuid%}
     #if attacker is a player:
@@ -50,10 +53,11 @@ on death of player:
 
     set {_drops::*} to drops  
     clear drops
-    drop 1 totem of undying at victim
+    chance of 0.1%:
+        drop 1 totem of undying at victim
     loop {_drops::*}:
         drop loop-value at victim
-        set velocity of last dropped item to vector(random number between 0 and 0.1, 0.1, random number between 0 and 0.1)
+        set velocity of last dropped item to vector(random number between -0.5 and 0.5, 0.1, random number between -0.5 and 0.5)
     clear {specialkitlist::%victim's uuid%}
     clear {godmode::%victim's uuid%}    
     #if {playerBounty::%victim's uuid%} is set:
@@ -80,7 +84,8 @@ on death of player:
         {event3::%{_uuid}%} is set
         loop all items in the inventory of {_playerWhoDetonated}:
             if name of loop-item contains "<dark gray><bold>[Permanent] <red><bold>Vampiric Blade":
-                {sharpness::%{_uuid}%} is not 30
+                {sharpness::%{_uuid}%} is not 12
+                mod({killStreak::%{_uuid}%},2) is 0
                 add 1 to {sharpness::%{_uuid}%}
                 enchant loop-item with "sharpness %{sharpness::%{_uuid}%}%" parsed as enchantment type
                 stop
@@ -100,9 +105,10 @@ on death of player:
             wait 1 tick
             clear {playerBounty::%victim's uuid%}
         {event3::%{_uuid}%} is set
-        loop all items in the inventory of {anchorkiller}:
+        loop all items in the inventory of {_playerWhoDetonated}:
             if name of loop-item contains "<dark gray><bold>[Permanent] <red><bold>Vampiric Blade":
-                {sharpness::%{_uuid}%} is not 30
+                {sharpness::%{_uuid}%} is not 12
+                mod({killStreak::%{_uuid}%},2) is 0
                 add 1 to {sharpness::%{_uuid}%}
                 enchant loop-item with "sharpness %{sharpness::%{_uuid}%}%" parsed as enchantment type
                 stop
@@ -122,7 +128,8 @@ on death of player:
         {event3::%{_uuid}%} is set
         loop all items in the inventory of attacker:
             if name of loop-item contains "<dark gray><bold>[Permanent] <red><bold>Vampiric Blade":
-                {sharpness::%{_uuid}%} is not 30
+                {sharpness::%{_uuid}%} is not 12
+                mod({killStreak::%{_uuid}%},2) is 0
                 add 1 to {sharpness::%{_uuid}%}
                 enchant loop-item with "sharpness %{sharpness::%{_uuid}%}%" parsed as enchantment type
                 stop
@@ -378,7 +385,7 @@ on explode:
         create an explosion of force 12 at event-location
     if event-entity is tnt:
         cancel the event
-        create an explosion of force 10 at event-location
+        create an explosion of force 5 at event-location
     if event-entity is creeper:
         cancel the event
         execute console command "minecraft:effect give @e[type=creeper] resistance 1 5"
@@ -593,7 +600,7 @@ on right click:
                         send "<green><bold>Cooldown over! You may now smite again." to player
     if name of player's held item contains "<dark grey><bold>[Permanent] <purple><bold>Necromantic Staff":
         if {cooldown2::%player's uuid%} is not set:
-            loop 3 times:
+            loop 1 time:
                 spawn a zombie at location of block at player
                 set name of last spawned entity to "<green><bold>Zombie - %player%"
                 equip last spawned entity with diamond helmet of protection 3
@@ -652,6 +659,9 @@ command /ewithdraw:
         if {event3::%player's uuid%} is set:
             clear {event3::%player's uuid%}
             set slot 3 of player's inventory to piece of paper named "<purple><bold>Event Voucher - Week 3"
+        if {event4::%player's uuid%} is set:
+            clear {event4::%player's uuid%}
+            set slot 4 of player's inventory to piece of paper named "<purple><bold>Event Voucher - Week 4"
         if {extraheart::%player's uuid%} is set:
             clear {extraheart::%player's uuid%}
             set slot 2 of player's inventory to nether star named "<purple><bold>Extra heart"
@@ -814,6 +824,10 @@ on command "sethome":
         send "&lYou can only set home in the end and nether dimensions!" to event-commandsender
         cancel event
         stop
+    else if event-commandsender is in world "Shibuya":
+        send "&lYou can only set home in the end and nether dimensions!" to event-commandsender
+        cancel event
+        stop
     set {safehome::%player's uuid%} to location of block at player
     send "You are safe here..."
 on command "team sethome":
@@ -824,6 +838,7 @@ on command "team sethome":
     set {safehome::%player's uuid%} to location of block at player
     send "You are safe here..."
 on command:
+    player is not op
     if command is "pl", "plugins" or "?":
         cancel event
         send "Nope, sorry!" to player
