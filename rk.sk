@@ -137,6 +137,7 @@ command /store:
 
 
 on first join:
+    make player execute command "/spawn"
     set {freerekit::%player's uuid%} to true
     set {firstjoin} to player
     set {firstjointimer} to 0
@@ -253,7 +254,7 @@ function randomKit(p: player):
     else if {_Boots} is 7:
         set {_p}'s boots to chainmail boots of protection 3 and unbreaking 1
     
-    set {_Sword} to random integer between 1 and 4 
+    set {_Sword} to random integer between 1 and 6
     if {_Sword} is 1:
         set slot 0 of {_p}'s inventory to iron sword of sharpness 1
     else if {_Sword} is 2:
@@ -312,22 +313,22 @@ function randomKit(p: player):
     if {_axe} is 7:
         set slot 2 of {_p}'s inventory to netherite axe of sharpness 1
     
-    chance of 5%:
+    chance of 10%:
         chance of 50%:
             set {_p}'s boots to netherite boots of protection 1 and blast protection 3
         chance of 50%:
             set {_p}'s boots to netherite boots of protection 1
-    chance of 5%:
+    chance of 10%:
         chance of 50%:
             set {_p}'s leggings to netherite leggings of protection 1 and blast protection 3
         chance of 50%:
             set {_p}'s leggings to netherite leggings of protection 1
-    chance of 5%:
+    chance of 10%:
         chance of 50%:
             set {_p}'s chestplate to netherite chestplate of protection 1 and blast protection 3
         chance of 50%:
             set {_p}'s chestplate to netherite chestplate of protection 1
-    chance of 5%:
+    chance of 10%:
         chance of 50%:
             set {_p}'s helmet to netherite helmet of protection 1 and blast protection 3
         chance of 50%:
@@ -477,6 +478,12 @@ on pick up:
     if event-item is cobbled deepslate:
         if {pickupores::%player's uuid%} is not true:
             cancel event
+
+on death of an enderman:
+    clear drops
+    drop 1 eye of ender at victim
+
+
 
 on right click:
     if name of player's held item contains "&b&lSpeed":
