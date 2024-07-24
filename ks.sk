@@ -3,8 +3,8 @@
 	
 options:
     rewardReq: 3, 5, 8, 10, 13, 15, 18, 20, 25, 30, 35, 40, 45 and 50
-    rewards: 5 sunflower named "<reset><yellow>&lCoin", 20 sunflower named "<reset><yellow>&lCoin", 64 sunflower named "<reset><yellow>&lCoin", 1 paper named "<reset><red>&lKillstreak Voucher", 1 paper named "<reset><red>&lKillstreak Voucher", (1 of unbreakable diamond coast golden helmet of protection 7, unbreaking 255 and mending) named "<yellow><bold>CROWN", 1 paper named "<reset><red>&lKillstreak Voucher", 1 paper named "<reset><red>&lKillstreak Voucher", 1 paper named "<reset><red>&lKillstreak Voucher", 1 paper named "<reset><red>&lKillstreak Voucher", 1 paper named "<reset><red>&lKillstreak Voucher", 1 paper named "<reset><red>&lKillstreak Voucher", 1 paper named "<reset><red>&lKillstreak Voucher" and 1 paper named "<reset><red>&lKillstreak Voucher"
-    bounty: 10 sunflower named "<reset><yellow>&lCoin", 32 sunflower named "<reset><yellow>&lCoin", 64 sunflower named "<reset><yellow>&lCoin", 1 paper named "<reset><red>&lKillstreak Voucher", 2 paper named "<reset><red>&lKillstreak Voucher", 4 paper named "<reset><red>&lKillstreak Voucher", 5 paper named "<reset><red>&lKillstreak Voucher", 6 paper named "<reset><red>&lKillstreak Voucher", 7 paper named "<reset><red>&lKillstreak Voucher", 8 paper named "<reset><red>&lKillstreak Voucher", 9 paper named "<reset><red>&lKillstreak Voucher", 10 paper named "<reset><red>&lKillstreak Voucher", 11 paper named "<reset><red>&lKillstreak Voucher" and 20 paper named "<reset><red>&lKillstreak Voucher"
+    rewards: 3, 5, 10, 20, 1 paper named "<reset><red>&lKillstreak Voucher", 32, 1 paper named "<reset><red>&lKillstreak Voucher", 1 paper named "<reset><red>&lKillstreak Voucher", 1 paper named "<reset><red>&lKillstreak Voucher", 1 paper named "<reset><red>&lKillstreak Voucher", 1 paper named "<reset><red>&lKillstreak Voucher", 1 paper named "<reset><red>&lKillstreak Voucher", 1 paper named "<reset><red>&lKillstreak Voucher" and (1 of unbreakable diamond coast golden helmet of protection 7, unbreaking 255 and mending) named "<yellow><bold>CROWN"
+    bounty: 10, 20, 32, 1 paper named "<reset><red>&lKillstreak Voucher", 2 paper named "<reset><red>&lKillstreak Voucher", 3 paper named "<reset><red>&lKillstreak Voucher", 4 paper named "<reset><red>&lKillstreak Voucher", 5 paper named "<reset><red>&lKillstreak Voucher", 6 paper named "<reset><red>&lKillstreak Voucher", 7 paper named "<reset><red>&lKillstreak Voucher", 8 paper named "<reset><red>&lKillstreak Voucher", 9 paper named "<reset><red>&lKillstreak Voucher", 10 paper named "<reset><red>&lKillstreak Voucher" and 15 paper named "<reset><red>&lKillstreak Voucher"
 function checkKS(p: player):
     set {_uuid} to {_p}'s uuid
     set {_rewardReq::*} to {@rewardReq}
@@ -27,12 +27,13 @@ function checkKS(p: player):
         loop {_rewardReq::*}:
             if {killStreak::%{_uuid}%} is loop-value:
                 broadcast "<red><bold>%{_p}% had reached a killstreak of %{killStreak::%{_uuid}%}%!"
-                broadcast "%{_p}% has been awarded with <green><bold>%{_rewards::%loop-index%}%"
+                broadcast "%{_p}% has been awarded with ($)<green><bold>%{_rewards::%loop-index%}%"
                 set {playerBounty::%{_uuid}%} to {_bounty::%loop-index%}
-                broadcast "%{_p}%'s bounty has increased to <red><bold>%{_bounty::%loop-index%}%!"
-                #{_rewards::%loop-index%} is a number:
-                    #add {_rewards::%loop-index%} to {_p}'s balance
-                give {_rewards::%loop-index%} to {_p}
+                broadcast "%{_p}%'s bounty has increased to ($)<red><bold>%{_bounty::%loop-index%}%!"
+                if {_rewards::%loop-index%} is a number:
+                    add {_rewards::%loop-index%} to {_p}'s balance
+                else:
+                    give {_rewards::%loop-index%} to {_p}
                 stop
     else:
         {_uuid} is set
@@ -73,11 +74,14 @@ on death of player:
         clear {killStreak::%victim's uuid%}		
         add 1 to {killStreak::%{_uuid}%}
         set {_playerWhoDetonated} to {_uuid} parsed as offline player
-        give 5 sunflower named "<reset><yellow>&lCoin" to {_playerWhoDetonated}    
+        add 5 to {_playerWhoDetonated}'s balance
         send "&aEnemy Down" to {_playerWhoDetonated}
         checkKS({_playerWhoDetonated})
         if {playerBounty::%victim's uuid%} is set:
-            give {playerBounty::%victim's uuid%} to {_playerWhoDetonated}
+            if {_playerBounty::%victim's uuid%} is a number:
+                add {_playerBounty::%victim's uuid%} to {_playerWhoDetonated}'s balance
+            else:
+                give {_playerBounty::%victim's uuid%} to {_playerWhoDetonated}
             broadcast "%{_playerWhoDetonated}% claimed the bounty: %{playerBounty::%victim's uuid%}%"
             wait 1 tick
             clear {playerBounty::%victim's uuid%}
@@ -96,11 +100,14 @@ on death of player:
         clear {killStreak::%victim's uuid%}		
         add 1 to {killStreak::%{_uuid}%}
         set {anchorkiller} to {_uuid} parsed as offline player
-        give 5 sunflower named "<reset><yellow>&lCoin" to {anchorkiller}    
+        add 5 to {anchorkiller}'s balance
         send "&aEnemy Down" to {anchorkiller}
         checkKS({anchorkiller})
         if {playerBounty::%victim's uuid%} is set:
-            give {playerBounty::%victim's uuid%} to {anchorkiller}
+            if {_playerBounty::%victim's uuid%} is a number:
+                add {_playerBounty::%victim's uuid%} to {anchorkiller}'s balance
+            else:
+                give {_playerBounty::%victim's uuid%} to {anchorkiller}
             broadcast "%{anchorkiller}% claimed the bounty: %{playerBounty::%victim's uuid%}%"
             wait 1 tick
             clear {playerBounty::%victim's uuid%}
@@ -114,14 +121,17 @@ on death of player:
                 stop
     else:
         set {_uuid} to attacker's uuid
-        give 5 sunflower named "<reset><yellow>&lCoin" to attacker    
+        add 5 to attacker's balance
         #broadcast "UUID of playerWhoDetonated: %{_uuid}%"
         clear {killStreak::%victim's uuid%}		
         add 1 to {killStreak::%{_uuid}%}
         send "&aEnemy Down" to attacker
         checkKS(attacker)
         if {playerBounty::%victim's uuid%} is set:
-            give {playerBounty::%victim's uuid%} to attacker
+            if {_playerBounty::%victim's uuid%} is a number:
+                add {_playerBounty::%victim's uuid%} to attacker's balance
+            else:
+                give {_playerBounty::%victim's uuid%} to attacker
             broadcast "%attacker% claimed the bounty: %{playerBounty::%victim's uuid%}%"
             wait 1 tick
             clear {playerBounty::%victim's uuid%}
@@ -374,6 +384,7 @@ on explode:
         cancel the event
         create an explosion of force 70 at event-location
     if event-entity is fireball:
+        shooter is blaze
         cancel the event
         create an explosion of force 5 at event-location
     if event-entity is large fireball:
